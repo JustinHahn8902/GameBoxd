@@ -1,20 +1,16 @@
 import './styles.css';
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import LandingPage from './routes/LandingPage';
+import Home from './routes/Home';
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/')
-      .then((response) => setMessage(response.data))
-      .catch((error) => console.log('Error fetching data:', error));
-  }, []);
+  // const { user } = useContext(UserContext);
 
   return (
-    <div>
-      <p>Message: {message}</p>
-    </div>
+    <Routes>
+      <Route path="/" element={/*user ? (<Home/>) : (*/<LandingPage/>/*)*/} />
+    </Routes>
   );
 }
 
