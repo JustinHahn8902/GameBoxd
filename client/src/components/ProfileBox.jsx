@@ -7,6 +7,10 @@ import { UserContext } from '../context/UserContext';
 function ProfileBox() {
     const user = useContext(UserContext);
     const [avatar, setAvatar] = useState(user?.avatar || DefaultAvatar);
+    const [changedAvatar, setChangedAvatar] = useState(false);
+    const [bio, setBio] = useState(user?.bio || '');
+    const [changedBio, setChangedBio] = useState(false);
+    const [readOnlyBio, setReadOnlyBio] = useState(true);
 
     const handleChangeImage = () => {
         document.getElementById("file-input").click();
@@ -17,6 +21,26 @@ function ProfileBox() {
         if (file) {
             const imageUrl = URL.createObjectURL(file);
             setAvatar(imageUrl);
+            setChangedAvatar(true);
+        }
+    }
+
+    const handleBioChange = (event) => {
+        setBio(event.target.value);
+        setChangedBio(true);
+    }
+
+    const handleSaveChanges = () => {
+        if (changedAvatar) {
+            console.log("Change avatar in database!");
+            setChangedAvatar(false);
+            // TODO: Put functionality to save avatar changes to database
+        }
+
+        if (changedBio) {
+            console.log("Change bio in database!");
+            setChangedBio(false);
+            // TODO: Put functionality to save bio changes to database
         }
     }
 
@@ -52,9 +76,16 @@ function ProfileBox() {
                     <p>Bio:</p>
                 </div>
                 <div className='profile-bio-right'>
-                    <p>{user ? user.bio : ''}</p>
+                    <textarea rows={8} defaultValue={bio} value={bio} onChange={handleBioChange} placeholder='Input a bio' readOnly={readOnlyBio} spellCheck={false} />
+                    <button onClick={() => {setReadOnlyBio(false)}}>
+                        Edit Bio
+                    </button>
                 </div>
             </div>
+
+            <button className='profile-save-changes-button' onClick={handleSaveChanges}>
+                Save Changes
+            </button>
         </div>
     );
 }
