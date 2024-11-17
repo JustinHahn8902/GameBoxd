@@ -6,12 +6,154 @@ html, body {
 #root {
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    width: 100vw;
     align-items: center;
 }
 
+.profile {
+    height: inherit;
+    width: inherit;
+    background-color: #C56970;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.profile-attribute-box {
+    height: inherit;
+    width: 50vw;
+    background-color: #856970;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-title {
+    display: flex;
+    text-align: center;
+    font-family: 'Georgia', serif;
+    font-size: 2.2em;
+}
+
+.profile-username-card {
+    display: flex;
+    overflow: hidden;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    height: 15%;
+    width: 95%;
+}
+
+.profile-username-left {
+    width: 40%;
+    text-align: center;
+    font-family: 'Helvetica', sans-serif;
+    border-radius: 5px 0 0 5px;
+    font-size: 1.3em;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+    background-color: #556970;
+}
+
+.profile-username-right {
+    width: 60%;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 1.15em;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    background-color: #556070;
+}
+
+.profile-avatar-card {
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 8px;
+    height: 30%;
+    width: 95%;
+}
+
+.profile-avatar-left {
+    font-family: 'Helvetica', sans-serif;
+    width: 40%;
+    text-align: center;
+    border-radius: 5px 0 0 5px;
+    font-size: 1.3em;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+    background-color: #556970;
+}
+
+.profile-avatar-right {
+    display: flex;
+    width: 60%;
+    align-content: center;
+    justify-content: center;
+    background-color: #556070;
+}
+
+.profile-avatar-container {
+    position: relative;
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.profile-avatar {
+    height: 90%;
+    width: 50%;
+    z-index: 1;
+}
+
+.edit-avatar {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    top: 150px;
+    right: 170px;
+    align-self: center;
+    border-radius: 30%;
+    z-index: 2;
+    background-color: white;
+}
+
+.profile-bio-card {
+    display: flex;
+    margin-bottom: 8px;
+    overflow: hidden;
+    height: 23%;
+    width: 95%;
+}
+
+.profile-bio-left {
+    width: 40%;
+    font-family: 'Helvetica', sans-serif;
+    text-align: center;
+    border-radius: 5px 0 0 5px;
+    font-size: 1.3em;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+    background-color: #556970;
+}
+
+.profile-bio-right {
+    display: flex;
+    width: 60%;
+    align-content: center;
+    justify-content: center;
+    background-color: #556070;
+}
+
 .landing {
-    height: 100vh;
-    width: 100vw;
+    height: inherit;
+    width: inherit;
     background-color: #AC4946;
     display: flex;
     flex-direction: column;
