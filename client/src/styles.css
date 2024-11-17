@@ -100,6 +100,7 @@ html, body {
     position: relative;
     align-content: center;
     justify-content: center;
+    align-items: center;
     display: flex;
     height: 100%;
     width: 100%;
@@ -115,8 +116,8 @@ html, body {
     position: absolute;
     height: 25px;
     width: 25px;
-    top: 150px;
-    right: 170px;
+    top: 195px;
+    right: 100px;
     align-self: center;
     border-radius: 30%;
     z-index: 2;
@@ -145,10 +146,29 @@ html, body {
 
 .profile-bio-right {
     display: flex;
+    flex-direction: column;
     width: 60%;
-    align-content: center;
     justify-content: center;
+    align-items: center;
     background-color: #556070;
+}
+
+.profile-bio-right textarea {
+    width: 90%;
+    margin: 0;
+    background-color: #657085;
+    border: none;
+}
+
+.profile-bio-right button {
+    background-color: #657085;
+    margin-top: 5px;
+    border-color: #657085;
+}
+
+.profile-save-changes-button {
+    background-color: #556570;
+    border-color: #556570;
 }
 
 .landing {
