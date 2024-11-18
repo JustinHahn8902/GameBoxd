@@ -171,7 +171,7 @@ html, body {
     border-color: #556570;
 }
 
-.landing {
+.login {
     height: inherit;
     width: inherit;
     background-color: #AC4946;
@@ -180,7 +180,7 @@ html, body {
     align-items: center;
 }
 
-.landing h1 {
+.login h1 {
     font-size: 4rem;
     margin-top: 0;
     margin-bottom: 0.5em;
@@ -196,21 +196,26 @@ html, body {
     width: 100%;
 }
 
-.google-logo-header {
-    width: 40px; 
-    height: auto;
-    margin-bottom: 20px;
+.login-username-input {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.login-box p {
-    font-size: 16px;
-    margin-bottom: 30px;
-    color: #160e0e;
+.login-password-input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.login-invalid {
+    margin: 10px;
+    text-align: center;
+    color: #cc0000;
 }
 
 .login-button {
     background-color: #1a73e8; 
     border: none;
+    margin-top: 10px;
     padding: 12px 20px;
     color: white;
     font-size: 16px;
@@ -223,6 +228,58 @@ html, body {
 
 .login-button:hover {
     background-color: #1567d3;
+}
+
+.register-button {
+    background-color: #22aca2;
+    border: none;
+    margin-top: 100px;
+    padding: 12px 20px;
+    color: white;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 25%;
+}
+
+.register-button:hover {
+    background-color: #1567d3;
+}
+
+.register {
+    height: inherit;
+    width: inherit;
+    background-color: #AC4946;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-box{
+    background-color: rgb(212, 175, 175);
+    padding: 90px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.register-username-input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.register-password-input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.register-password-confirm-input{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 @media (max-width: 800px) {

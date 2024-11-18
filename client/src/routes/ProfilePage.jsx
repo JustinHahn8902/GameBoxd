@@ -1,7 +1,7 @@
 import ProfileBox from '../components/ProfileBox';
 import '../styles.css';
 
-function Profile() {
+function ProfilePage() {
 
     return (
         <div className='profile'>
@@ -10,4 +10,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default ProfilePage;
