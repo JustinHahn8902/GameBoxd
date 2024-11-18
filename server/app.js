@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 
+const authRoutes = require('./routes/auth');
+
 dotenv.config();
 
 // Make express app
@@ -16,6 +18,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use(cors());
+app.use(express.json());
 
 // Connect to MongoDB when setup
 mongoose.connect(process.env.MONGO_URI, {
@@ -28,6 +31,9 @@ mongoose.connect(process.env.MONGO_URI, {
 app.get('/',  (req, res) => {
     res.send('Default route works!');
 });
+
+// Routes
+app.use('/api/auth', authRoutes);
 
 // Start server
 const port = process.env.PORT || 5000;
