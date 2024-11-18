@@ -20,6 +20,7 @@ function ProfileBox() {
         const file = event.target.files[0];
         if (file) {
             const imageUrl = URL.createObjectURL(file);
+            console.log(imageUrl);
             setAvatar(imageUrl);
             setChangedAvatar(true);
         }

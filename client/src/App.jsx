@@ -1,17 +1,19 @@
 import './styles.css';
 import React, { useState, useEffect, useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import LandingPage from './routes/LandingPage';
-import Home from './routes/Home';
-import Profile from './routes/Profile';
+import LoginPage from './routes/LoginPage';
+import RegisterPage from './routes/RegisterPage';
+import HomePage from './routes/HomePage';
+import ProfilePage from './routes/ProfilePage';
 
 function App() {
   // const { user } = useContext(UserContext);
 
   return (
     <Routes>
-      <Route path="/" element={/*user ? (<Home/>) : (*/<LandingPage/>/*)*/} />
-      <Route path="/profile" element={<Profile/>} />
+      <Route path="/" element={/*user ? (<HomePage />) : (*/<LoginPage />/*)*/} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
 }
