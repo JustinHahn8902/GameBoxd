@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
+const followRoutes = require('./routes/follow');
+const unfollowRoutes = require('./routes/unfollow');
 
 const createApp = () => {
   const app = express();
@@ -16,6 +18,8 @@ const createApp = () => {
 
   // Routes
   app.use('/api/auth', authRoutes);
+  app.use('/api/user/followers', followRoutes);
+  app.use('/api/user/unfollowers', unfollowRoutes);
 
   return app;
 };
