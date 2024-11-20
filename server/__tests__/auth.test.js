@@ -15,6 +15,7 @@ describe('Authentication Routes', () => {
   });
 
   describe('POST /api/auth/register', () => {
+    // AI
     it('should register a new user successfully', async () => {
       const response = await request(app)
         .post('/api/auth/register')
@@ -38,6 +39,25 @@ describe('Authentication Routes', () => {
       expect(response.status).toBe(400);
       expect(response.body.error).toBe('Username already exists.');
     });
+
+    // MANUAL
+    it('should return 400 when username isnt in request body', async () => {
+      const response = await request(app)
+        .post('/api/auth/register')
+        .send({ password: 'password123', bio: 'This is my bio' });
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Username and password are required');
+    });
+
+    it('should return 400 when password isnt in request body', async () => {
+      const response = await request(app)
+        .post('/api/auth/register')
+        .send({ username: 'testuser', bio: 'This is my bio' });
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Username and password are required');
+    });
   });
 
   describe('POST /api/auth/login', () => {
@@ -46,6 +66,7 @@ describe('Authentication Routes', () => {
       await user.save();
     });
 
+    // AI
     it('should log in a user successfully', async () => {
       const response = await request(app)
         .post('/api/auth/login')
@@ -54,6 +75,43 @@ describe('Authentication Routes', () => {
       expect(response.status).toBe(200);
       expect(response.body.message).toBe('Login successful.');
       expect(response.body.userId).toBeDefined();
+    });
+
+    // MANUAL
+    it('should return 400 when username isnt in request body', async () => {
+      const response = await request(app)
+        .post('/api/auth/login')
+        .send({ password: 'password123' });
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Username and password are required.');
+    });
+
+    it('should return 400 when password isnt in request body', async () => {
+      const response = await request(app)
+        .post('/api/auth/login')
+        .send({ username: 'testuser' });
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Username and password are required.');
+    });
+
+    it('should return 404 when user isnt found', async () => {
+      const response = await request(app)
+        .post('/api/auth/login')
+        .send({ username: 'nonexistentuser', password: 'password123' });
+
+      expect(response.status).toBe(404);
+      expect(response.body.error).toBe('User not found.');
+    });
+
+    it('should return 401 when password is invalid', async () => {
+      const response = await request(app)
+        .post('/api/auth/login')
+        .send({ username: 'loginuser', password: 'wrongpassword' });
+
+      expect(response.status).toBe(401);
+      expect(response.body.error).toBe('Invalid password.');
     });
   });
 });
