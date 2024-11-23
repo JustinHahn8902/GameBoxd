@@ -8,28 +8,36 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        axios.get('http://localhost:8080/user', { withCredentials: true })
+    const login = async ({ username, password }) => {
+        await axios.post('http://localhost:5000/api/auth/login', { username, password })
             .then(response => {
-                setUser(response.data);
+                if (response.status == 200) {
+                    setUser(response.data.user);
+                    navigate('/');
+                } else {
+                    setUser(null);
+                }
             }).catch(() => {
                 setUser(null);
             });
-    }, []);
+    };
 
-    const logout = () => {
-        axios.post('http://localhost:8080/logout', {}, { withCredentials: true })
-            .then(() => {
-                setUser(null);
-                navigate('/');
+    const register = async ({ username, password }) => {
+        await axios.post('http://localhost:5000/api/auth/register', { username, password })
+            .then(response => {
+                if (response.status == 201) {
+                    setUser(response.data.user);
+                    navigate('/');
+                } else {
+                    setUser(null);
+                }
             }).catch(() => {
                 setUser(null);
-                navigate('/');
             });
     };
 
     return (
-        <UserContext.Provider value={{ user, setUser, logout }}>
+        <UserContext.Provider value={{ user, login, register }}>
             {children}
         </UserContext.Provider>
     );

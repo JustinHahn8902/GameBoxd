@@ -5,15 +5,16 @@ import LoginPage from './routes/LoginPage';
 import RegisterPage from './routes/RegisterPage';
 import HomePage from './routes/HomePage';
 import ProfilePage from './routes/ProfilePage';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
-  // const { user } = useContext(UserContext);
 
   return (
     <Routes>
-      <Route path="/" element={/*user ? (<HomePage />) : (*/<LoginPage />/*)*/} />
+      <Route path="/" element={<ProtectedRoute><HomePage/></ProtectedRoute>} />
+      <Route path="/" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/profile" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>} />
     </Routes>
   );
 }

@@ -1,9 +1,10 @@
 import '../styles.css';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 function RegisterPage() {
-
+    const { register } = useContext(UserContext);
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,7 +13,7 @@ function RegisterPage() {
     const [usernameInvalid, setUsernameInvalid] = useState(false);
     const [passwordInvalid, setPasswordInvalid] = useState(false);
 
-    const handleRegister = () => {
+    const handleRegister = async () => {
 
         if (username == '' || password == '' || password != confirmPassword) {
             if (username == '') {setUsernameInvalid(true)} else {setUsernameInvalid(false)}
@@ -21,7 +22,7 @@ function RegisterPage() {
             setUsernameInvalid(false);
             setPasswordInvalid(false);
 
-            console.log("handling register");
+            await register({ username, password });
         }
     }
 
@@ -41,7 +42,7 @@ function RegisterPage() {
                 </div>
                 {passwordInvalid ? (<p className='login-invalid'>Password Invalid</p>) : null}
                 <button onClick={handleRegister} className="login-button">
-                    Log In
+                    Register
                 </button>
                 <button onClick={() => navigate('/')} className="register-button">
                     Log In
