@@ -9,35 +9,44 @@ export const UserProvider = ({ children }) => {
     const navigate = useNavigate();
 
     const login = async ({ username, password }) => {
-        await axios.post('http://localhost:5000/api/auth/login', { username, password })
-            .then(response => {
-                if (response.status == 200) {
-                    setUser(response.data.user);
-                    navigate('/');
-                } else {
-                    setUser(null);
-                }
-            }).catch(() => {
+        try {
+            const response = await axios.post('http://localhost:5000/api/auth/login', { username, password });
+            if (response.status == 200) {
+                setUser(response.data.user);
+                navigate('/');
+            } else {
                 setUser(null);
-            });
+                return response.data.error;
+            }
+        } catch (error) {
+            setUser(null);
+            return error.response.data.error;
+        }
     };
 
     const register = async ({ username, password }) => {
-        await axios.post('http://localhost:5000/api/auth/register', { username, password })
-            .then(response => {
-                if (response.status == 201) {
-                    setUser(response.data.user);
-                    navigate('/');
-                } else {
-                    setUser(null);
-                }
-            }).catch(() => {
+        try {
+            const response = await axios.post('http://localhost:5000/api/auth/register', { username, password });
+            if (response.status == 201) {
+                setUser(response.data.user);
+                navigate('/');
+            } else {
                 setUser(null);
-            });
+                return response.data.error;
+            }
+        } catch (error) {
+            setUser(null);
+            return error.response.data.error;
+        }
     };
 
+    const logout = () => {
+        setUser(null);
+        navigate('/');
+    }
+
     return (
-        <UserContext.Provider value={{ user, login, register }}>
+        <UserContext.Provider value={{ user, login, register, logout }}>
             {children}
         </UserContext.Provider>
     );

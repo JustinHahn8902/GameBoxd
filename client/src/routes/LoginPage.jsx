@@ -11,32 +11,36 @@ function LoginPage() {
 
     const [usernameInvalid, setUsernameInvalid] = useState(false);
     const [passwordInvalid, setPasswordInvalid] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleLogin = async () => {
-
         if (username == '' || password == '') {
-            if (username == '') {setUsernameInvalid(true)} else {setUsernameInvalid(false)}
-            if (password == '') {setPasswordInvalid(true)} else {setPasswordInvalid(false)}
+            if (username == '') { setUsernameInvalid(true); } else { setUsernameInvalid(false); }
+            if (password == '') { setPasswordInvalid(true); } else { setPasswordInvalid(false); }
         } else {
             setUsernameInvalid(false);
             setPasswordInvalid(false);
 
-            await login({ username, password });
+            const error = await login({ username, password });
+            if (error) {
+                setErrorMessage(error);
+            }
         }
-    }
+    };
 
     return (
         <div className="login">
             <h1>Welcome to GameBoxd</h1>
             <div className="login-box">
                 <div className='login-username-input'>
-                    Username: <input value={username} onChange={e => setUsername(e.target.value)}/>
+                    Username: <input value={username} onChange={e => setUsername(e.target.value)} />
                 </div>
                 {usernameInvalid ? (<p className='login-invalid'>Username Invalid</p>) : null}
                 <div className='login-password-input'>
-                    Password: <input value={password} onChange={e => setPassword(e.target.value)}/>
+                    Password: <input value={password} onChange={e => setPassword(e.target.value)} />
                 </div>
                 {passwordInvalid ? (<p className='login-invalid'>Password Invalid</p>) : null}
+                {errorMessage ? (<p className='login-invalid'>{errorMessage}</p>) : null}
                 <button onClick={handleLogin} className="login-button">
                     Log In
                 </button>
@@ -45,7 +49,7 @@ function LoginPage() {
                 </button>
             </div>
         </div>
-    )
+    );
 }
 
 export default LoginPage;

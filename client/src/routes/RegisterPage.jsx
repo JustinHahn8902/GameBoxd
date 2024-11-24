@@ -9,9 +9,9 @@ function RegisterPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
     const [usernameInvalid, setUsernameInvalid] = useState(false);
     const [passwordInvalid, setPasswordInvalid] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleRegister = async () => {
 
@@ -22,7 +22,10 @@ function RegisterPage() {
             setUsernameInvalid(false);
             setPasswordInvalid(false);
 
-            await register({ username, password });
+            const error = await register({ username, password });
+            if (error) {
+                setErrorMessage(error);
+            }
         }
     }
 
@@ -31,16 +34,17 @@ function RegisterPage() {
             <h1>Register Below</h1>
             <div className="register-box">
                 <div className='register-username-input'>
-                    Username: <input value={username} onChange={e => setUsername(e.target.value)}/>
+                    Username: <input value={username} onChange={e => setUsername(e.target.value)} />
                 </div>
                 {usernameInvalid ? (<p className='login-invalid'>Username Invalid</p>) : null}
                 <div className='register-password-input'>
-                    Password: <input value={password} onChange={e => setPassword(e.target.value)}/>
+                    Password: <input value={password} onChange={e => setPassword(e.target.value)} />
                 </div>
                 <div className='register-password-confirm-input'>
-                    Confirm Password: <input value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
+                    Confirm Password: <input value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
                 </div>
                 {passwordInvalid ? (<p className='login-invalid'>Password Invalid</p>) : null}
+                {errorMessage ? (<p className='login-invalid'>{errorMessage}</p>) : null}
                 <button onClick={handleRegister} className="login-button">
                     Register
                 </button>
