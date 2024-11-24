@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/UserContext';
 import '../styles.css'
 
 function LoginPage() {
-    // const { user } = useContext(UserContext);
+    const { login } = useContext(UserContext);
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,7 +12,7 @@ function LoginPage() {
     const [usernameInvalid, setUsernameInvalid] = useState(false);
     const [passwordInvalid, setPasswordInvalid] = useState(false);
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
 
         if (username == '' || password == '') {
             if (username == '') {setUsernameInvalid(true)} else {setUsernameInvalid(false)}
@@ -21,7 +21,7 @@ function LoginPage() {
             setUsernameInvalid(false);
             setPasswordInvalid(false);
 
-            console.log("handling login");
+            await login({ username, password });
         }
     }
 

@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Registration endpoint
 router.post('/register', async (req, res) => {
-    const { username, password, bio } = req.body;
+    const { username, password } = req.body;
 
     if (!username || !password) {
         return res.status(400).json({ error: 'Username and password are required' });
@@ -17,10 +17,9 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ error: 'Username already exists.' });
         }
 
-        const user = new User({ username, password, bio });
+        const user = new User({ username, password });
         await user.save();
-
-        res.status(201).json({ message: 'User registered successfully.' });
+        res.status(201).json({ message: 'User registered successfully.', user: user });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: error });
@@ -45,7 +44,7 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid password.' });
         }
 
-        res.status(200).json({ message: 'Login successful.', userId: user._id });
+        res.status(200).json({ message: 'Login successful.', user: user });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: error });
