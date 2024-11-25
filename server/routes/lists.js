@@ -28,6 +28,23 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Get list by User
+router.get('/user/:userId', async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const lists = await List.find({ user: userId }).populate('games');
+        if (!lists) {
+            return res.status(404).json({ error: 'Lists not found' });
+        }
+
+        return res.status(200).json(lists);
+    } catch (error) {
+        console.error('Error getting lists by user:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+})
+
 // Add a game to a list
 router.post('/:listId/games', async (req, res) => {
     const { listId } = req.params;
