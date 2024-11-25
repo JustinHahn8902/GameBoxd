@@ -31,10 +31,16 @@ router.post('/', async (req, res) => {
 // Get list by User
 router.get('/user/:userId', async (req, res) => {
     const { userId } = req.params;
+    const { requestingUserId } = req.body;
 
     try {
-        const lists = await List.find({ user: userId }).populate('games');
-        if (!lists) {
+        let query = { user: userId };
+        if (requestingUserId !== userId) {
+            query.isPublic = true;
+        }
+
+        const lists = await List.find(query).populate('games');
+        if (!lists || lists.length === 0) {
             return res.status(404).json({ error: 'Lists not found' });
         }
 
@@ -43,7 +49,7 @@ router.get('/user/:userId', async (req, res) => {
         console.error('Error getting lists by user:', error);
         return res.status(500).json({ error: 'Internal server error' });
     }
-})
+});
 
 // Add a game to a list
 router.post('/:listId/games', async (req, res) => {

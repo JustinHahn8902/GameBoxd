@@ -8,6 +8,7 @@ import ProfilePage from './routes/ProfilePage';
 import ProtectedRoute from './ProtectedRoute';
 import GameDetailPage from './routes/GameDetailPage';
 import Navbar from './components/NavBar';
+import MyListsPage from './routes/MyListsPage';
 import { UserContext } from './context/UserContext';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/profile" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>} />
           <Route path="/game/:id" element={<ProtectedRoute><GameDetailPage/></ProtectedRoute>} />
+          <Route path="/my-lists" element={<ProtectedRoute><MyListsPage/></ProtectedRoute>} />
         </Routes>
       </div>
     </>
