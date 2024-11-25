@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const gameRoutes = require('./routes/games');
+const userRoutes = require('./routes/user');
 
 const createApp = () => {
   const app = express();
@@ -18,6 +19,7 @@ const createApp = () => {
   // Routes
   app.use('/api/auth', authRoutes);
   app.use('/api/games', gameRoutes);
+  app.use('/api/user', userRoutes);
 
 
   return app;
