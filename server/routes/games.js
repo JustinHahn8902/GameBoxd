@@ -27,6 +27,17 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.post('/similar', async (req, res) => {
+    const { ids } = req.body;
+    try {
+        const games = await Game.find({ igdb_id: { $in: ids } });
+        res.json(games);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error.' });
+    }
+});
+
 
 
 module.exports = router;
