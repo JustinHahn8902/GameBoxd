@@ -92,7 +92,7 @@ router.delete('/:listId/games/:gameId', async (req, res) => {
 })
 
 // Set list as public or private
-router.patch('/:lsitId', async (req, res) => {
+router.patch('/:listId', async (req, res) => {
     const { listId } = req.params;
     const { isPublic } = req.body;
 
