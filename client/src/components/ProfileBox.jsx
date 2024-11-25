@@ -1,16 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import DefaultAvatar from '../assets/default-avatar.svg';
 import EditAvatar from '../assets/edit-avatar.svg';
 import '../styles.css';
 import { UserContext } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 function ProfileBox() {
-    const user = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [avatar, setAvatar] = useState(user?.avatar || DefaultAvatar);
     const [changedAvatar, setChangedAvatar] = useState(false);
     const [bio, setBio] = useState(user?.bio || '');
     const [changedBio, setChangedBio] = useState(false);
     const [readOnlyBio, setReadOnlyBio] = useState(true);
+
+    useEffect(() => {
+        console.log(user);
+        console.log(bio);
+    }, []);
+
+    const navigate = useNavigate();
 
     const handleChangeImage = () => {
         document.getElementById("file-input").click();
@@ -35,14 +43,18 @@ function ProfileBox() {
         if (changedAvatar) {
             console.log("Change avatar in database!");
             setChangedAvatar(false);
+            user.avatar = avatar;
             // TODO: Put functionality to save avatar changes to database
         }
 
         if (changedBio) {
             console.log("Change bio in database!");
             setChangedBio(false);
+            user.bio = bio;
             // TODO: Put functionality to save bio changes to database
         }
+
+        console.log(user);
     }
 
     return (
@@ -55,7 +67,7 @@ function ProfileBox() {
                     <p>Username:</p>
                 </div>
                 <div className='profile-username-right'>
-                    <p>{user ? user.name : 'N/A'}</p>
+                    <p>{user ? user.username : 'N/A'}</p>
                 </div>
             </div>
 
@@ -87,6 +99,7 @@ function ProfileBox() {
             <button className='profile-save-changes-button' onClick={handleSaveChanges}>
                 Save Changes
             </button>
+            <button className='profile-back-to-home-button' onClick={() => {navigate('/')}}>Home</button>
         </div>
     );
 }
