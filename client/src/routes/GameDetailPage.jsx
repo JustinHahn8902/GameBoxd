@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../styles.css';
+import StarRating from '../components/StarRating';
 
 function GameDetailPage() {
     const { id } = useParams();
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [review, setReview] = useState('');
 
     useEffect(() => {
         const fetchGame = async () => {
@@ -24,6 +26,15 @@ function GameDetailPage() {
         fetchGame();
     }, [id]);
 
+    const handleRating = (rating) => {
+        // put rating backend logic here
+    };
+
+    const handleReviewSubmit = () => {
+        alert('Thank you for your review!');
+        setReview('');
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -36,9 +47,10 @@ function GameDetailPage() {
         <div className="game-detail">
             <h1>{game.name || 'Unknown Game'}</h1>
             <img src={game.cover_url || 'placeholder-image-url'} alt={game.name} className="game-cover" />
+            <StarRating handleRating={handleRating} />
             <p><strong>Genres:</strong> {game.genres?.join(', ') || 'N/A'}</p>
             <p><strong>Release Date:</strong> {game.release_date ? new Date(game.release_date).toLocaleDateString() : 'N/A'}</p>
-            <p><strong>Rating:</strong> {game.total_rating ? `${game.total_rating.toFixed(1)} (${game.total_rating_count} votes)` : 'N/A'}</p>
+            <p><strong>Average User Rating:</strong> {game.total_rating ? `${game.total_rating.toFixed(1) / 10} (${game.total_rating_count} votes)` : 'N/A'}</p>
             <p><strong>Summary:</strong> {game.summary || 'No summary available.'}</p>
             <p><strong>Platforms:</strong> {game.platforms?.join(', ') || 'N/A'}</p>
             <div className="game-screenshots">
@@ -70,6 +82,18 @@ function GameDetailPage() {
                 ) : (
                     <p>No similar games available.</p>
                 )}
+            </div>
+            <div className="leave-review">
+                <h2>Leave a Review</h2>
+                <textarea
+                    className="review-textarea"
+                    placeholder="Write your review here..."
+                    value={review}
+                    onChange={(e) => setReview(e.target.value)}
+                ></textarea>
+                <button className="review-submit-button" onClick={handleReviewSubmit}>
+                    Submit Review
+                </button>
             </div>
         </div>
     );
