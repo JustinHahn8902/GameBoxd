@@ -385,3 +385,127 @@ body {
         max-width: 100%;
     }
 }
+
+/* Navbar styles */
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px; /* Add padding to the left and right */
+    background-color: #1a1a1a;
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-left h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.navbar-middle {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-search-form {
+    display: flex;
+    width: 50%;
+}
+
+.navbar-search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    width: 100%;
+}
+
+.navbar-search-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #1a73e8;
+    color: white;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-search-button:hover {
+    background-color: #1567d3;
+}
+
+.navbar-left {
+    cursor: pointer;
+}
+
+.navbar-right {
+    position: relative;
+}
+
+.profile-picture {
+    cursor: pointer;
+}
+
+.profile-picture-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+}
+
+.dropdown-menu p {
+    margin: 0;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu p:hover {
+    background-color: #f4f4f4;
+}
+
+.main-content {
+    padding-top: 60px; /* Adjust this value based on the height of your navbar */
+}
+
+.search-results {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.search-result-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: black; /* Ensure text color is set to black */
+}
+
+.search-result-item:hover {
+    background-color: #f4f4f4;
+}

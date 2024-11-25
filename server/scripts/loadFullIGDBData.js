@@ -91,7 +91,7 @@ async function fetchAndSaveIGDBData() {
     try {
         const token = await getOAuthToken();
         // Step 1: Fetch Games
-        const games = await fetchGames(token, 500, 500); // Adjust limit and offset as needed
+        const games = await fetchGames(token, 500, 1000); // Adjust limit and offset as needed
         console.log(`Fetched ${games.length} games`);
         // Step 2: Process each game
         for (const game of games) {
