@@ -71,6 +71,7 @@ function Navbar() {
                     <div className="dropdown-menu">
                         <p onClick={() => navigate('/profile')}>Profile</p>
                         <p onClick={() => navigate('/settings')}>Settings</p>
+                        <p onClick={() => navigate('/my-lists')}>My Lists</p>
                         <p onClick={logout}>Sign out</p>
                     </div>
                 )}
