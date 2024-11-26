@@ -629,6 +629,11 @@ body {
     font-size: 2.5rem;
     margin-bottom: 20px;
     text-align: center;
+    color: black;
+}
+
+.my-lists-checkbox-label {
+    color: black;
 }
 
 .create-list-form {

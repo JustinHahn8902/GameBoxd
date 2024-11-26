@@ -158,9 +158,10 @@
 .dropdown-menu p {
   margin: 10px 0;
   font-size: 0.9rem;
-  color: #333;
+  color: white;
   cursor: pointer;
   transition: color 0.3s;
+
 }
 
 .dropdown-menu p:hover {
