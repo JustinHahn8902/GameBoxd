@@ -8,7 +8,7 @@ const { ObjectId } = mongoose.Types;
 
 const router = express.Router();
 
-router.get('/:userId/:gameId', async (req, res) => {
+router.get('/user-rating/:userId/:gameId', async (req, res) => {
     const { userId, gameId } = req.params;
 
     try {
@@ -26,7 +26,7 @@ router.get('/:userId/:gameId', async (req, res) => {
     }
 });
 
-router.post('/:userId/:gameId', async (req, res) => {
+router.post('/user-rating/:userId/:gameId', async (req, res) => {
     const { userId, gameId } = req.params;
     const { rating, review } = req.body;
 
