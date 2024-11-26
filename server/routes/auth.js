@@ -51,6 +51,31 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.post('/update', async (req, res) => {
+    const { username, followers, following } = req.body;
+
+    if (!username) {
+        return res.status(400).json({ error: 'Username is required.' });
+    }
+
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ error: 'User not found.' });
+        }
+
+        user.followers = followers;
+        user.following = following;
+        await user.save();
+
+        res.status(200).json({ message: "Update successfully"});
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error });
+    }
+})
+
 router.get('/search', async (req, res) => {
     const { username } = req.query;
 
