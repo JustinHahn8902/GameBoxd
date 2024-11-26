@@ -701,39 +701,52 @@ body {
     background-color: #cc0000;
 }
 
+.enhanced-description-content{
+    margin-bottom: 15px;
+    color: #111 !important; /* Ensure dark color for the title */
+    font-weight: bold; /* Emphasize heading */
+}
+
 .enhanced-description-section {
     margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    padding: 20px; /* Increased padding for a more spacious look */
+    border: 1px solid #ddd; /* Slightly lighter border */
+    border-radius: 8px; /* Softer corners */
+    background-color: #f7f9fc; /* Light blue-gray background for subtle contrast */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
+    font-family: 'Arial', sans-serif; /* Change font for improved readability */
 }
 
 .enhanced-description-section h2 {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.8rem; /* Slightly larger heading size */
+    color: #111 !important; /* Ensure dark color for the title */
+    font-weight: bold; /* Emphasize heading */
 }
 
 .enhanced-description-section p {
     font-size: 1rem;
-    line-height: 1.5;
-}
-
-.enhanced-description-section h2 {
-    font-size: 1.5em;
+    line-height: 1.8; /* Increased line-height for better readability */
+    color: #555; /* Softer black for less strain */
     margin-bottom: 1rem;
-}
-
-.enhanced-description-section p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
 }
 
 .enhanced-description-section ul {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     padding-left: 1.5rem;
+    color: #555; /* Match paragraph text color */
 }
 
 .enhanced-description-section li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem; /* Slightly smaller list item text */
 }
 
+.enhanced-description-section a {
+    color: #0073e6; /* Add style for links if any */
+    text-decoration: none;
+}
+
+.enhanced-description-section a:hover {
+    text-decoration: underline;
+}

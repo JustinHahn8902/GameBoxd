@@ -60,8 +60,9 @@ function GameDetailPage() {
         const fetchEnhancedDescription = async (gameData) => {
             try {
                 console.log("Sending request with game summary and images:", gameData.summary, gameData.screenshot_urls);
+                // Use the summary and screenshots for the enhanced description
                 const response = await axios.post('http://localhost:5001/api/games/generate-description', {
-                    description: gameData.name, // Use the game's name as the title
+                    description: gameData.summary || 'No summary available.', // Use summary instead of name
                     images: gameData.screenshot_urls || [], // Pass screenshot URLs
                 });
                 setEnhancedDescription(response.data.enhancedDescription);
@@ -194,7 +195,9 @@ function GameDetailPage() {
                     <p>Generating enhanced description...</p>
                 ) : (
                     enhancedDescription ? (
-                        <ReactMarkdown>{enhancedDescription}</ReactMarkdown>
+                        <div className="enhanced-description-content">
+                            <ReactMarkdown>{enhancedDescription}</ReactMarkdown>
+                        </div>
                     ) : (
                         <p>Generating enhanced description...</p>
                     )
@@ -209,6 +212,7 @@ function GameDetailPage() {
                 ) : (
                     <p>No screenshots available.</p>
                 )}
+
            </div>
            <div className="game-websites">
                 <h2>Websites</h2>
