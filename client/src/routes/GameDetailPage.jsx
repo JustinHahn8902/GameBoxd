@@ -13,6 +13,8 @@ function GameDetailPage() {
     const { user } = useContext(UserContext);
 
     const { id } = useParams();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentImage, setCurrentImage] = useState(null);
     const navigate = useNavigate();
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(0);
@@ -24,7 +26,7 @@ function GameDetailPage() {
     const [reviewDisabled, setReviewDisabled] = useState(false);
     const [reviews, setReviews] = useState([]);
     const [enhancedDescription, setEnhancedDescription] = useState('');
-    const [generatingDescription, setGeneratingDescription] = useState(false);
+    const [generatingDescription] = useState(false);
 
     useEffect(() => {
         setLoading(0);
@@ -203,27 +205,38 @@ function GameDetailPage() {
                     )
                 )}
             </div>
-            <div className="game-screenshots">
-                <h2>Screenshots</h2>
-                {game.screenshot_urls?.length ? (
-                    game.screenshot_urls.map((url, index) => (
-                        <img key={index} src={url} alt={`Screenshot ${index + 1}`} className="game-screenshot"/>
-                    ))
-                ) : (
-                    <p>No screenshots available.</p>
-                )}
 
-           </div>
-           <div className="game-websites">
-                <h2>Websites</h2>
-                {game.website_urls?.length ? (
-                    game.website_urls.map((url, index) => (
-                        <p key={index}><a href={url} target="_blank" rel="noopener noreferrer">{url}</a></p>
-                    ))
-                ) : (
-                    <p>No websites available.</p>
-                )}
-            </div>
+            <div className="game-screenshots">
+            <h2>Screenshots</h2>
+            {game.screenshot_urls?.length ? (
+                game.screenshot_urls.map((url, index) => (
+                    <img
+                        key={index}
+                        src={url}
+                        alt={`Screenshot ${index + 1}`}
+                        className="game-screenshot"
+                        onClick={() => {
+                            setCurrentImage(url);
+                            setIsModalOpen(true);
+                        }}
+                    />
+                ))
+            ) : (
+                <p>No screenshots available.</p>
+            )}
+        </div>
+
+            {/* Modal Component */}
+            {isModalOpen && (
+                <div className="modal" onClick={() => setIsModalOpen(false)}>
+                    <img
+                        src={currentImage}
+                        alt="Full screen screenshot"
+                        className="modal-image"
+                        onClick={(e) => e.stopPropagation()} // Prevent closing modal when clicking on the image
+                    />
+                </div>
+            )}
             <div className="game-similar-games">
                 <h2>Similar Games</h2>
                 {similarGames.length ? (
