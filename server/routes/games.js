@@ -18,7 +18,8 @@ router.get('/popular', async (req, res) => {
     try {
         const games = await Game.find({ total_rating_count: { $gt: 100 } })
             .sort({ total_rating: -1 })
-            .limit(25);
+            .limit(25)
+            .select('name cover_url igdb_id');
         res.json(games);
     } catch (error) {
         console.error(error);
@@ -31,7 +32,8 @@ router.get('/genre/:genre', async (req, res) => {
     try {
         const games = await Game.find({ genres: new RegExp(genre, 'i') })
             .sort({ total_rating: -1 })
-            .limit(25);
+            .limit(25)
+            .select('name cover_url igdb_id');
         res.json(games);
     } catch (error) {
         console.error(error);
