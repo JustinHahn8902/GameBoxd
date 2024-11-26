@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
-import '../styles.css';
+import './NavBar.css';
 
 function Navbar() {
     const navigate = useNavigate();

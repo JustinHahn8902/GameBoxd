@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+/* General Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('../assets/images/image12.png') black no-repeat; /* Dark gradient background */
+    color: white;
+  }
+  
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Navigation Bar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(32, 28, 28, 0.752);
+    box-shadow: 0 4px 8px rgba(252, 248, 248, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fd00a9;
+  }
+  
+  .nav-button {
+    background: none;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-left: 10px;
+  }
+  
+  .nav-button:hover {
+    background: #4CAF50;
+    color: white;
+    border: 2px solid #4CAF50;
+  }
+  
+  /* Hero Section */
+  .hero {
+    text-align: center;
+    
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0px;
+    color: #fd00a9;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+  }
+  
+  /* Featured Games Section */
+  .featured-games {
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fd00a9;
+  }
+  
+  .featured-games-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  .game-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 200px;
+  }
+  
+  .game-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .game-card-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .game-card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+  }
+  
+  /* Assorted Games Section */
+  .assorted-games {
+    padding: 20px;
+  }
+  
+  .game-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .game-list-item {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .game-list-item:hover {
+    color: #fd00a9;
+  }
+  
+
+/* Carousel Wrapper */
+.carousel-wrapper {
+    position: relative;
+    width: 100%; /* Take full width of the parent container */
+    max-width: 1200px; /* Add a max width for larger screens */
+    margin: 0 auto; /* Center the carousel */
+    display: flex;
+    align-items: center;
+    overflow: hidden; /* Hide overflowing items */
+    padding: 10px 0; /* Add padding for better spacing */
+  }
+
+.carousel-section {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    left: 100px;
+    right: 5px;
+  }
+  
+  .carousel-genres-container {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 30px;
+    overflow-x: 0px; /* Enable horizontal scrolling if needed */
+    padding: 10px 0;
+  }
+  
+  .carousel-genre {
+    flex: 0 0 auto; /* Ensures each genre carousel is treated as a block in the horizontal layout */
+    min-width: 50px; /* Minimum width for each genre block */
+    text-align: center;
+  }
+  
+  .genre-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #0ad9f5;
+  }
+  
+  /* Carousel Container */
+  .carousel-container {
+    display: flex;
+    gap: 15px;
+    overflow-x: hidden; /* Ensure only visible items are shown */
+    scroll-behavior: smooth;
+    width: 100%; /* Take full width of the wrapper */
+    height: auto;
+    padding: 10px 0;
+  }
+  
+  /* Carousel Item */
+  .carousel-item {
+    flex: 0 0 calc(100% / 5 - 20px); /* Show 5 items by default with spacing */
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  /* Carousel Item Image */
+  .carousel-item img {
+    width: auto; /* Ensure the image scales with the container */
+    scale: 120%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+  }
+  
+  .carousel-item-title {
+    font-size: 1.1rem;
+    color: #ffffff;
+  }
+  
+  /* Horizontal Scrolling */
+  .carousel-genres-container::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .carousel-genres-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+  }
+  
+  .carousel-genres-container::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+  }
+
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  
+  .carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  
+  .carousel-button-left {
+    left: -10px; /* Adjust to fit within the carousel wrapper */
+  }
+  
+  .carousel-button-right {
+    right: -10px; /* Adjust to fit within the carousel wrapper */
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 1024px) {
+    .carousel-item {
+      flex: 0 0 calc(100% / 3 - 15px); /* Show 3 items on medium screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .carousel-item {
+      flex: 0 0 calc(100% / 2 - 10px); /* Show 2 items on small screens */
+    }
+  
+    .carousel-button {
+      font-size: 1.2rem;
+      width: 25px;
+      height: 25px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .carousel-item {
+      flex: 0 0 calc(100% - 20px); /* Show 1 item on extra small screens */
+    }
+  
+    .carousel-button-left {
+      left: 0;
+    }
+  
+    .carousel-button-right {
+      right: 0;
+    }
+  }
