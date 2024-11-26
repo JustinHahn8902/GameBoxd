@@ -12,7 +12,8 @@ export const UserProvider = ({ children }) => {
         await axios.post('http://localhost:5001/api/auth/login', { username, password })
             .then(response => {
                 if (response.status === 200) {
-                    setUser(response.data.user);
+                    const userData = response.data.user;
+                    setUser(userData); // Store the user data (including avatar, bio)
                     navigate('/');
                 } else {
                     setUser(null);
@@ -36,8 +37,13 @@ export const UserProvider = ({ children }) => {
             });
     };
 
+    const logout = () => {
+        setUser(null); // Clear user data
+        navigate('/login'); // Redirect to login page
+    };
+
     return (
-        <UserContext.Provider value={{ user, login, register }}>
+        <UserContext.Provider value={{ user, login, register, logout }}>
             {children}
         </UserContext.Provider>
     );
