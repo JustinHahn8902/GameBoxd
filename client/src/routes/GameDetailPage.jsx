@@ -248,7 +248,7 @@ function GameDetailPage() {
                                 <p>
                                     By: <strong>{review.userId.username}</strong> 
                                 </p>
-                                <p>{review.review}</p>
+                                <p className="review-contents">"{review.review}"</p>
                                 <p>Last Updated: {new Date(review.updatedAt).toLocaleString()}</p>
                             </li>
                         ))}
