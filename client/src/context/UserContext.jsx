@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,9 +9,9 @@ export const UserProvider = ({ children }) => {
     const navigate = useNavigate();
 
     const login = async ({ username, password }) => {
-        await axios.post('http://localhost:5000/api/auth/login', { username, password })
+        await axios.post('http://localhost:5001/api/auth/login', { username, password })
             .then(response => {
-                if (response.status == 200) {
+                if (response.status === 200) {
                     setUser(response.data.user);
                     navigate('/');
                 } else {
@@ -23,9 +23,9 @@ export const UserProvider = ({ children }) => {
     };
 
     const register = async ({ username, password }) => {
-        await axios.post('http://localhost:5000/api/auth/register', { username, password })
+        await axios.post('http://localhost:5001/api/auth/register', { username, password })
             .then(response => {
-                if (response.status == 201) {
+                if (response.status === 201) {
                     setUser(response.data.user);
                     navigate('/');
                 } else {

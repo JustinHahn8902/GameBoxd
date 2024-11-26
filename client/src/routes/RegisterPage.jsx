@@ -15,9 +15,9 @@ function RegisterPage() {
 
     const handleRegister = async () => {
 
-        if (username == '' || password == '' || password != confirmPassword) {
-            if (username == '') {setUsernameInvalid(true)} else {setUsernameInvalid(false)}
-            if (password == '' || password != confirmPassword) {setPasswordInvalid(true)} else {setPasswordInvalid(false)}
+        if (username === '' || password === '' || password !== confirmPassword) {
+            if (username === '') {setUsernameInvalid(true)} else {setUsernameInvalid(false)}
+            if (password === '' || password !== confirmPassword) {setPasswordInvalid(true)} else {setPasswordInvalid(false)}
         } else {
             setUsernameInvalid(false);
             setPasswordInvalid(false);
