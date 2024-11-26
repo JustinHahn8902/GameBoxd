@@ -79,7 +79,7 @@ function MyListsPage() {
                     onChange={(e) => setNewListName(e.target.value)}
                     placeholder="New List Name"
                 />
-                <label>
+                <label className='my-lists-checkbox-label'>
                     <input
                         type="checkbox"
                         checked={isPublic}
