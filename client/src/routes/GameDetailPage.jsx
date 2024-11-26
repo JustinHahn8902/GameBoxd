@@ -6,12 +6,14 @@ import StarRating from '../components/StarRating';
 import { UserContext } from '../context/UserContext';
 
 function GameDetailPage() {
+    const doneLoading = 3;
+
     const { user } = useContext(UserContext);
 
     const { id } = useParams();
     const navigate = useNavigate();
     const [game, setGame] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(0);
     const [error, setError] = useState('');
     const [similarGames, setSimilarGames] = useState([]);
     const [review, setReview] = useState('');
@@ -23,6 +25,7 @@ function GameDetailPage() {
 
 
     useEffect(() => {
+        setLoading(0);
         setReview('');
         setRating(0);
         setUserHasReview(false);
@@ -43,6 +46,10 @@ function GameDetailPage() {
                 }
             } catch (error) {
                 setError(error.response?.data?.error || 'Error fetching game details.');
+            } finally {
+                setLoading(loading => {
+                    return loading + 1;
+                });
             }
         };
 
@@ -57,6 +64,10 @@ function GameDetailPage() {
                 }
             } catch (error) {
                 setError(error.response?.data?.error || 'Error fetching user rating.');
+            } finally {
+                setLoading(loading => {
+                    return loading + 1;
+                });
             }
         }
 
@@ -70,7 +81,9 @@ function GameDetailPage() {
             } catch (error) {
                 setError(error.response?.data?.error || 'Error fetching reviews.');
             } finally {
-                setLoading(false);
+                setLoading(loading => {
+                    return loading + 1;
+                });
             }
         }
 
@@ -134,7 +147,7 @@ function GameDetailPage() {
     };
     
 
-    if (loading) {
+    if (loading < doneLoading) {
         return <div>Loading...</div>;
     }
 
