@@ -34,7 +34,7 @@ function HomePage() {
           while (!validGame) {
             const randomId = Math.floor(Math.random() * 20000) + 1;
             try {
-              const response = await axios.get(`http://localhost:5000/api/games/${randomId}`);
+              const response = await axios.get(`http://localhost:5001/api/games/${randomId}`);
               if (!isDuplicate(response.data, allGames)) {
                 validGame = response.data;
                 featuredResponse.push(validGame);
@@ -48,7 +48,7 @@ function HomePage() {
         setFeaturedGames(featuredResponse);
 
         // Fetch Popular Games
-        const popularResponse = await axios.get('http://localhost:5000/api/games/popular');
+        const popularResponse = await axios.get('http://localhost:5001/api/games/popular');
         const filteredPopularGames = popularResponse.data.filter(
           (game) => !isDuplicate(game, allGames)
         );
@@ -57,9 +57,9 @@ function HomePage() {
 
         // Fetch Games by Genre
         const [shooterResponse, adventureResponse, platformResponse] = await Promise.all([
-          axios.get('http://localhost:5000/api/games/genre/shooter'),
-          axios.get('http://localhost:5000/api/games/genre/adventure'),
-          axios.get('http://localhost:5000/api/games/genre/platform'),
+          axios.get('http://localhost:5001/api/games/genre/shooter'),
+          axios.get('http://localhost:5001/api/games/genre/adventure'),
+          axios.get('http://localhost:5001/api/games/genre/platform'),
         ]);
 
         setGenreGames({

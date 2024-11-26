@@ -155,6 +155,10 @@ function GameDetailPage() {
                     game.screenshot_urls.map((url, index) => (
                         <img key={index} src={url} alt={`Screenshot ${index + 1}`} className="game-screenshot"/>
                     ))
+                ) : (
+                    <p>No screenshots available.</p>
+                )}
+           </div>
 
             <div className="reviews-section">
                 <h2>Reviews</h2>
