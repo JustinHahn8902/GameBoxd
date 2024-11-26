@@ -13,7 +13,7 @@ function MyListsPage() {
         const fetchLists = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/api/lists/user/${user._id}`, {
-                    data: { requestingUserId: user._id }
+                    params: { requestingUserId: user._id }
                 });
                 setLists(response.data);
             } catch (error) {

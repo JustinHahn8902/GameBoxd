@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
 // Get list by User
 router.get('/user/:userId', async (req, res) => {
     const { userId } = req.params;
-    const { requestingUserId } = req.body;
+    const { requestingUserId } = req.query;
 
     try {
         let query = { user: userId };
@@ -50,6 +50,7 @@ router.get('/user/:userId', async (req, res) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 // Add a game to a list
 router.post('/:listId/games', async (req, res) => {
@@ -96,6 +97,25 @@ router.delete('/:listId/games/:gameId', async (req, res) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 })
+
+router.delete('/:listId', async (req, res) => {
+    const { listId } = req.params;
+
+    try {
+        const list = await List.findById(listId);
+        if (!list) {
+            return res.status(404).json({ error: 'List not found' });
+        }
+
+        await List.findByIdAndDelete(listId);
+
+        return res.status(200).json({ message: 'List successfully deleted' });
+    } catch (error) {
+        console.error('Error deleting list:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 // Set list as public or private
 router.patch('/:listId', async (req, res) => {
