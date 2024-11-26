@@ -4,6 +4,7 @@ import axios from 'axios';
 import { UserContext } from '../context/UserContext'; // Import UserContext
 import './NavBar.css';
 import { FiSearch } from 'react-icons/fi';
+import { FiFilter } from 'react-icons/fi'; // Import filter icon
 import DefaultAvatar from '../assets/default-avatar.svg'; // Import default avatar image
 
 function Navbar() {
@@ -14,8 +15,18 @@ function Navbar() {
     const [selectedItem, setSelectedItem] = useState(-1);
     const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
     const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+    const [filterDropdownOpen, setFilterDropdownOpen] = useState(false); // Track filter dropdown
     const searchRef = useRef(null);
     const profileRef = useRef(null);
+    const filterRef = useRef(null);
+
+    const genres = [
+        'Shooter', 'Role-Playing (RPG)', 'Simulator', 'Strategy',
+        'Turn-based Strategy (TBS)', 'Tactical', 'Adventure', 'Arcade',
+        'Fighting', 'Platform', 'Indie', 'Puzzle', 'Visual Novel',
+        'Racing', 'Hack and slash/Beat \'em up', 'Point-and-click',
+        'Sport', 'Music', 'Real Time Strategy (RTS)'
+    ];
 
     const handleSearchChange = async (event) => {
         const input = event.target.value;
@@ -27,6 +38,7 @@ function Navbar() {
                 setSearchResults(response.data.slice(0, 10));
                 setSearchDropdownOpen(true);
                 setProfileDropdownOpen(false);
+                setFilterDropdownOpen(false);
             } catch (error) {
                 console.error('Error fetching search results:', error);
             }
@@ -36,51 +48,9 @@ function Navbar() {
         }
     };
 
-    const handleKeyDown = (event) => {
-        if (event.key === 'ArrowDown') {
-            setSelectedItem((prev) => (prev < searchResults.length - 1 ? prev + 1 : prev));
-        } else if (event.key === 'ArrowUp') {
-            setSelectedItem((prev) => (prev > 0 ? prev - 1 : -1));
-        } else if (event.key === 'Enter') {
-            if (selectedItem >= 0) {
-                navigate(`/game/${searchResults[selectedItem].igdb_id}`);
-                setSearchResults([]);
-                setQuery('');
-                setSearchDropdownOpen(false);
-            } else {
-                handleSearchSubmit();
-            }
-        }
-    };
-
-    const handleSearchSubmit = async () => {
-        if (query.trim() !== '') {
-            try {
-                const response = await axios.get(`http://localhost:5001/api/games/search?name=${query}`);
-                console.log(response.data);
-                setSearchDropdownOpen(false);
-            } catch (error) {
-                console.error('Error performing search:', error);
-            }
-        }
-    };
-
-    const handleResultClick = (id) => {
-        navigate(`/game/${id}`);
-        setSearchResults([]);
-        setQuery('');
-        setSearchDropdownOpen(false);
-    };
-
-    const toggleProfileDropdown = () => {
-        setProfileDropdownOpen((prev) => !prev);
-        setSearchDropdownOpen(false);
-    };
-
-    const handleClearSearch = () => {
-        setQuery('');
-        setSearchResults([]);
-        setSearchDropdownOpen(false);
+    const handleFilterSelect = (genre) => {
+        setFilterDropdownOpen(false);
+        navigate(`/games/genre/${genre}`);
     };
 
     useEffect(() => {
@@ -89,10 +59,13 @@ function Navbar() {
                 searchRef.current &&
                 !searchRef.current.contains(event.target) &&
                 profileRef.current &&
-                !profileRef.current.contains(event.target)
+                !profileRef.current.contains(event.target) &&
+                filterRef.current &&
+                !filterRef.current.contains(event.target)
             ) {
                 setSearchDropdownOpen(false);
                 setProfileDropdownOpen(false);
+                setFilterDropdownOpen(false);
             }
         };
 
@@ -112,14 +85,13 @@ function Navbar() {
                     className="navbar-search-form"
                     onSubmit={(e) => {
                         e.preventDefault();
-                        handleSearchSubmit();
+                        setSearchDropdownOpen(false);
                     }}
                 >
                     <input
                         type="text"
                         value={query}
                         onChange={handleSearchChange}
-                        onKeyDown={handleKeyDown}
                         placeholder="Search for games..."
                         className="navbar-search-input"
                     />
@@ -132,8 +104,8 @@ function Navbar() {
                         {searchResults.map((game, index) => (
                             <div
                                 key={game.igdb_id}
-                                className={`search-result-item ${index === selectedItem ? 'active' : ''}`}
-                                onClick={() => handleResultClick(game.igdb_id)}
+                                className="search-result-item"
+                                onClick={() => navigate(`/game/${game.igdb_id}`)}
                             >
                                 {game.name}
                             </div>
@@ -141,13 +113,33 @@ function Navbar() {
                     </div>
                 )}
             </div>
+            <div className="filter-section" ref={filterRef}>
+                <button
+                    className="navbar-filter-button"
+                    onClick={() => setFilterDropdownOpen((prev) => !prev)}
+                >
+                    <FiFilter size={20} />
+                </button>
+                {filterDropdownOpen && (
+                    <div className="filter-dropdown">
+                        {genres.map((genre, index) => (
+                            <div
+                                key={index}
+                                className="filter-item"
+                                onClick={() => handleFilterSelect(genre)}
+                            >
+                                {genre}
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
             <div className="navbar-right" ref={profileRef}>
-                <div className="profile-picture" onClick={toggleProfileDropdown}>
+                <div className="profile-picture" onClick={() => setProfileDropdownOpen((prev) => !prev)}>
                     <img
                         src={user?.avatar || DefaultAvatar}
                         alt="Profile"
                         className="profile-picture-img"
-                        onError={(e) => (e.target.src = DefaultAvatar)}
                     />
                 </div>
                 {profileDropdownOpen && (
@@ -158,7 +150,7 @@ function Navbar() {
                         <p
                             onClick={() => {
                                 logout();
-                                navigate('/login'); // Redirect to login page after logout
+                                navigate('/login');
                             }}
                         >
                             Sign out
