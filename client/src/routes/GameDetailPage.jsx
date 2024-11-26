@@ -8,7 +8,7 @@ import StarRating from '../components/StarRating';
 import { UserContext } from '../context/UserContext';
 
 function GameDetailPage() {
-    const doneLoading = 3;
+    const doneLoading = 4;
 
     const { user } = useContext(UserContext);
 
@@ -27,6 +27,9 @@ function GameDetailPage() {
     const [reviews, setReviews] = useState([]);
     const [enhancedDescription, setEnhancedDescription] = useState('');
     const [generatingDescription] = useState(false);
+    const [lists, setLists] = useState([]);
+    const [selectedListId, setSelectedListId] = useState('');
+    const [selectedList ,setSelectedList] = useState([]);
 
     useEffect(() => {
         setLoading(0);
@@ -36,6 +39,7 @@ function GameDetailPage() {
         setReviewDisabled(false);
         setError('');
         setReviews([]);
+        setLists([]);
 
         const fetchGame = async () => {
             try {
@@ -59,6 +63,19 @@ function GameDetailPage() {
             }
         };
 
+        const fetchLists = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5001/api/lists/user/${user._id}`, {
+                    params: { requestingUserId: user._id }
+                });
+                setLists(response.data);
+            } catch (error) {
+                console.error('Error fetching list:', error);
+            } finally {
+                setLoading((loading) => loading + 1);
+            }
+        };
+
         const fetchEnhancedDescription = async (gameData) => {
             try {
                 console.log("Sending request with game summary and images:", gameData.summary, gameData.screenshot_urls);
@@ -72,10 +89,6 @@ function GameDetailPage() {
                 console.error("Failed to generate enhanced description:", error);
             }
         };
-
-
-
-
 
         const fetchUserRating = async () => {
             try {
@@ -111,6 +124,7 @@ function GameDetailPage() {
         }
 
         fetchGame();
+        fetchLists();
         fetchUserRating();
         fetchReviews();
     }, [id]);
@@ -118,7 +132,7 @@ function GameDetailPage() {
     const handleRating = async (rating) => {
         setRating(rating);
         try {
-            await axios.post(`http://localhost:5000/api/rating/user-rating/${user._id}/${id}`, {
+            await axios.post(`http://localhost:5001/api/rating/user-rating/${user._id}/${id}`, {
                 rating: rating,
                 review: review
             })
@@ -135,7 +149,7 @@ function GameDetailPage() {
             alert("Please Write a Review!");
         } else {
             try {
-                await axios.post(`http://localhost:5000/api/rating/user-rating/${user._id}/${id}`, {
+                await axios.post(`http://localhost:5001/api/rating/user-rating/${user._id}/${id}`, {
                     rating: rating,
                     review: review
                 })
@@ -157,7 +171,7 @@ function GameDetailPage() {
             alert("Please Write a Review!");
         } else {
             try {
-                await axios.post(`http://localhost:5000/api/rating/user-rating/${user._id}/${id}`, {
+                await axios.post(`http://localhost:5001/api/rating/user-rating/${user._id}/${id}`, {
                     rating: rating,
                     review: review
                 });
@@ -173,6 +187,32 @@ function GameDetailPage() {
         navigate(`/game/${gameId}`);
     };
 
+    const handleAddToList = async () => {
+        if (selectedListId === '') {
+            alert("Please select a list first!");
+        } else{
+            try {
+                await axios.post(`http://localhost:5001/api/lists/${selectedListId}/games`, {
+                    gameId: id,
+                });
+                setSelectedList([...selectedList, game._id]);
+            } catch (error) {
+                setError(error.response?.data?.error || 'Error adding game to list');
+            }
+        }
+    }
+
+    const handleRemoveFromList = async () => {
+        try {
+            await axios.delete(`http://localhost:5001/api/lists/${selectedListId}/games/${game._id}`);
+            setSelectedList(selectedList.filter((gameId) => {
+                return gameId !== game._id;
+            }));
+        } catch (error) {
+            setError(error.response?.data?.error || 'Error deleting game from list');
+        }
+    }
+
     if (loading < doneLoading) {
         return <div>Loading...</div>;
     }
@@ -185,7 +225,44 @@ function GameDetailPage() {
         <div className="game-detail">
             <h1>{game.name || 'Unknown Game'}</h1>
             <img src={game.cover_url || 'placeholder-image-url'} alt={game.name} className="game-cover" />
-            <StarRating handleRating={(rating) => setRating(rating)} size={40} rating={rating} />
+
+            <div className="rating-and-list">
+                <StarRating handleRating={(rating) => setRating(rating)} size={40} rating={rating} />
+                <div className="add-to-list">
+                    <h2>Add To List</h2>
+                    <select
+                        onChange={(e) => {
+                            setSelectedListId(e.target.value);
+                            setSelectedList(lists.find((list) => {
+                                return list._id === e.target.value;
+                            }).games.map((game) => {
+                                return game._id
+                            }))
+                            console.log(lists.find((list) => {
+                                return list._id === e.target.value;
+                            }).games.map((game) => {
+                                return game._id
+                            }));
+                        }}
+                        defaultValue=""
+                    >
+                        <option value="" disabled>
+                            Select a list
+                        </option>
+                        {lists.map((list) => (
+                            <option key={list._id} value={list._id}>
+                                {list.name}
+                            </option>
+                        ))}
+                    </select>
+                    { selectedListId !== "Select a list" && selectedList.includes(game._id) ? (
+                        <button className="remove-from-list-button" onClick={handleRemoveFromList}>Remove</button>
+                    ) : (
+                        <button className="add-to-list-button" onClick={handleAddToList}>Add</button>
+                    )}
+                </div>
+            </div>
+
             <p><strong>Genres:</strong> {game.genres?.join(', ') || 'N/A'}</p>
             <p><strong>Release Date:</strong> {game.release_date ? new Date(game.release_date).toLocaleDateString() : 'N/A'}</p>
             <p><strong>Average User Rating:</strong> {game.total_rating ? `${game.total_rating.toFixed(1) / 10} (${game.total_rating_count} votes)` : 'N/A'}</p>
@@ -207,24 +284,24 @@ function GameDetailPage() {
             </div>
 
             <div className="game-screenshots">
-            <h2>Screenshots</h2>
-            {game.screenshot_urls?.length ? (
-                game.screenshot_urls.map((url, index) => (
-                    <img
-                        key={index}
-                        src={url}
-                        alt={`Screenshot ${index + 1}`}
-                        className="game-screenshot"
-                        onClick={() => {
-                            setCurrentImage(url);
-                            setIsModalOpen(true);
-                        }}
-                    />
-                ))
-            ) : (
-                <p>No screenshots available.</p>
-            )}
-        </div>
+                <h2>Screenshots</h2>
+                {game.screenshot_urls?.length ? (
+                    game.screenshot_urls.map((url, index) => (
+                        <img
+                            key={index}
+                            src={url}
+                            alt={`Screenshot ${index + 1}`}
+                            className="game-screenshot"
+                            onClick={() => {
+                                setCurrentImage(url);
+                                setIsModalOpen(true);
+                            }}
+                        />
+                    ))
+                ) : (
+                    <p>No screenshots available.</p>
+                )}
+            </div>
 
             {/* Modal Component */}
             {isModalOpen && (
@@ -256,6 +333,7 @@ function GameDetailPage() {
                     <p>No similar games available.</p>
                 )}
             </div>
+
             <div className="leave-review">
                 <span className="leave-review-header">
                     <h2 className="leave-review-text">{ userHasReview ? "Your Review" : "Leave a Review" }:</h2>
@@ -305,6 +383,7 @@ function GameDetailPage() {
                     <p>No reviews available for this game.</p>
                 )}
             </div>
+
         </div>
     );
 }

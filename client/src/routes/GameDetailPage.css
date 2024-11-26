@@ -244,3 +244,71 @@
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
+
+.rating-and-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px; /* Adjust spacing as needed */
+}
+
+.rating-and-list .add-to-list {
+    margin-left: 20px; /* Add spacing between the two sections */
+    text-align: right; /* Align dropdown content to the right */
+}
+
+.rating-and-list .add-to-list select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: auto; /* Adjust width as needed */
+}
+
+.add-to-list {
+    margin-top: 20px;
+}
+
+.add-to-list select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: rgba(92, 92, 92, 0.151);
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    color: rgb(255, 255, 255);
+}
+
+.add-to-list select option {
+    background-color: #7a7a7a;
+}
+
+.add-to-list h2 {
+    margin-bottom: 10px;
+}
+
+.add-to-list-button {
+    size: 20px;
+    margin-left: 10px;
+    padding: 9px;
+    padding-left: 22px;
+    padding-right: 22px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.remove-from-list-button {
+    size: 20px;
+    margin-left: 10px;
+    padding: 9px;
+    background: #b93030;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
