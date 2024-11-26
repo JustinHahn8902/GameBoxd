@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 import { FaStar } from "react-icons/fa";
 
-function StarRating({ handleRating }) {
-    const [rating, setRating] = useState(0); // Final rating
+function StarRating({ handleRating, size, rating }) {
     const [hoverRating, setHoverRating] = useState(null); // Hovered rating
-
-    const handleRatingChange = (rating) => {
-        setRating(rating);
-        handleRating(rating);
-    }
 
     return (
         <div>
@@ -20,11 +14,11 @@ function StarRating({ handleRating }) {
                             type="radio"
                             name="rate"
                             value={currentRating}
-                            onClick={() => handleRatingChange(currentRating)}
+                            onClick={() => handleRating(currentRating)}
                             style={{ display: "none" }} // Hide the input
                         />
                         <FaStar
-                            size={40}
+                            size={size}
                             color={
                                 hoverRating
                                     ? currentRating <= hoverRating
