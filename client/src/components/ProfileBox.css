@@ -106,21 +106,21 @@
 }
 
 .edit-bio-button {
-    background-color: #007bff;
+    background-color: #fd00a9;
     color: white;
 }
 
 .save-bio-button {
-    background-color: #28a745;
+    background-color: #000000;
     color: white;
 }
 
 .edit-bio-button:hover {
-    background-color: #0056b3;
+    background-color: #000000;
 }
 
 .save-bio-button:hover {
-    background-color: #218838;
+    background-color: #fd00a9;
 }
 
 /* People List */

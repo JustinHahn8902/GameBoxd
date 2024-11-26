@@ -1,18 +1,19 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/UserContext'; // Import UserContext
 import './NavBar.css';
 import { FiSearch } from 'react-icons/fi';
+import DefaultAvatar from '../assets/default-avatar.svg'; // Import default avatar image
 
 function Navbar() {
     const navigate = useNavigate();
-    const { logout } = useContext(UserContext);
+    const { user, logout } = useContext(UserContext); // Destructure `user` from the context
     const [query, setQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [selectedItem, setSelectedItem] = useState(-1);
-    const [searchDropdownOpen, setSearchDropdownOpen] = useState(false); // Track search dropdown
-    const [profileDropdownOpen, setProfileDropdownOpen] = useState(false); // Track profile dropdown
+    const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
+    const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
     const searchRef = useRef(null);
     const profileRef = useRef(null);
 
@@ -23,9 +24,9 @@ function Navbar() {
         if (input.trim() !== '') {
             try {
                 const response = await axios.get(`http://localhost:5001/api/games/search?name=${input}`);
-                setSearchResults(response.data.slice(0, 10)); // Show only the top 10 results
+                setSearchResults(response.data.slice(0, 10));
                 setSearchDropdownOpen(true);
-                setProfileDropdownOpen(false); // Close profile dropdown if open
+                setProfileDropdownOpen(false);
             } catch (error) {
                 console.error('Error fetching search results:', error);
             }
@@ -73,7 +74,7 @@ function Navbar() {
 
     const toggleProfileDropdown = () => {
         setProfileDropdownOpen((prev) => !prev);
-        setSearchDropdownOpen(false); // Close search dropdown when profile dropdown toggles
+        setSearchDropdownOpen(false);
     };
 
     const handleClearSearch = () => {
@@ -82,7 +83,6 @@ function Navbar() {
         setSearchDropdownOpen(false);
     };
 
-    // Close dropdowns on outside click
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
@@ -143,14 +143,26 @@ function Navbar() {
             </div>
             <div className="navbar-right" ref={profileRef}>
                 <div className="profile-picture" onClick={toggleProfileDropdown}>
-                    <img src="placeholder-profile-pic-url" alt="Profile" className="profile-picture-img" />
+                    <img
+                        src={user?.avatar || DefaultAvatar}
+                        alt="Profile"
+                        className="profile-picture-img"
+                        onError={(e) => (e.target.src = DefaultAvatar)}
+                    />
                 </div>
                 {profileDropdownOpen && (
                     <div className="dropdown-menu">
                         <p onClick={() => navigate('/profile')}>Profile</p>
                         <p onClick={() => navigate('/settings')}>Settings</p>
                         <p onClick={() => navigate('/my-lists')}>My Lists</p>
-                        <p onClick={logout}>Sign out</p>
+                        <p
+                            onClick={() => {
+                                logout();
+                                navigate('/login'); // Redirect to login page after logout
+                            }}
+                        >
+                            Sign out
+                        </p>
                     </div>
                 )}
             </div>
