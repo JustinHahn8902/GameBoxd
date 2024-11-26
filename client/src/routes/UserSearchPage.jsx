@@ -37,7 +37,6 @@ function UserSearchPage() {
 
     return (
         <>
-            <Navbar />
             <div className="user-search-page">
                 <h1>User Search</h1>
                 <form onSubmit={handleSearch} className="search-form">
