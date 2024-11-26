@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import '../styles.css';
@@ -9,6 +10,8 @@ function MyListsPage() {
     const [newListName, setNewListName] = useState('');
     const [isPublic, setIsPublic] = useState(true);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchLists = async () => {
             try {
@@ -17,7 +20,7 @@ function MyListsPage() {
                 });
                 setLists(response.data);
             } catch (error) {
-                console.error('Error fetching lists:', error);
+                console.error('Error fetching list:', error);
             }
         };
 
@@ -25,16 +28,20 @@ function MyListsPage() {
     }, [user._id]);
 
     const handleCreateList = async () => {
-        try {
-            const response = await axios.post('http://localhost:5001/api/lists', {
-                name: newListName,
-                userId: user._id,
-                isPublic
-            });
-            setLists([...lists, response.data]);
-            setNewListName('');
-        } catch (error) {
-            console.error('Error creating list:', error);
+        if (newListName.length === 0) {
+            alert("Please Enter a List Name!");
+        } else {
+            try {
+                const response = await axios.post('http://localhost:5001/api/lists/create-list', {
+                    name: newListName,
+                    userId: user._id,
+                    isPublic
+                });
+                setLists([...lists, response.data]);
+                setNewListName('');
+            } catch (error) {
+                console.error('Error creating list:', error);
+            }
         }
     };
 
@@ -56,6 +63,10 @@ function MyListsPage() {
         } catch (error) {
             console.error('Error toggling privacy:', error);
         }
+    };
+
+    const handleViewList = (listId) => {
+        navigate(`/list/${listId}`);
     };
 
     return (
@@ -86,6 +97,7 @@ function MyListsPage() {
                         <button onClick={() => handleTogglePrivacy(list._id, list.isPublic)}>
                             {list.isPublic ? 'Make Private' : 'Make Public'}
                         </button>
+                        <button onClick={() => handleViewList(list._id)}>View</button>
                     </div>
                 ))}
             </div>

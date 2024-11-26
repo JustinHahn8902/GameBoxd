@@ -6,7 +6,7 @@ const Game = require('../models/Game');
 const router = express.Router();
 
 // Create a new list
-router.post('/', async (req, res) => {
+router.post('/create-list', async (req, res) => {
     const { name, userId, isPublic } = req.body;
 
     try {
@@ -51,6 +51,23 @@ router.get('/user/:userId', async (req, res) => {
     }
 });
 
+// Get a list by its id
+router.get('/list/:listId', async (req, res) => {
+    const { listId } = req.params;
+
+    try {
+        const list = await List.findById(listId).populate('games');
+        if (!list) {
+            return res.status(404).json({ error: 'List not found' });
+        }
+
+        return res.status(200).json(list);
+    } catch (error) {
+        console.error('Error retrieving list:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 // Add a game to a list
 router.post('/:listId/games', async (req, res) => {
@@ -63,7 +80,7 @@ router.post('/:listId/games', async (req, res) => {
             return res.status(404).json({ error: 'List not found' });
         }
 
-        const game = await Game.findById(gameId);
+        const game = await Game.findOne({ igdb_id: gameId });
         if (!game) {
             return res.status(404).json({ error: 'Game not found' });
         }
