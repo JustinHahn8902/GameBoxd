@@ -49,6 +49,35 @@ router.post('/login', async (req, res) => {
         console.error(error);
         res.status(500).json({ error: error });
     }
+});
+
+router.get('/search', async (req, res) => {
+    const { username } = req.query;
+
+    if (!username) {
+        return res.status(400).json({ error: 'Username is required.' });
+    }
+
+    try {
+        const users = await User.find({ username: new RegExp(username, 'i') }).limit(10);
+        res.json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error });
+    }
 })
+
+router.get('/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found.' });
+        }
+        res.json(user);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error });
+    }
+});
 
 module.exports = router;
