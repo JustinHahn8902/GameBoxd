@@ -13,7 +13,7 @@ const FolProfileBox = ({ username }) => {
 
     useEffect(() => {
         const getUser = async () => {
-            let res = await axios.post('http://localhost:5000/api/users/folUser', {username: username});
+            let res = await axios.post('http://localhost:5001/api/users/folUser', {username: username});
             if (res.status == 200) {
                 setFolUser(res.data.user);
             } else {
