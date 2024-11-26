@@ -18,14 +18,12 @@ Before running the application, ensure you have the following installed:
 ### Backend (Server)
 
 1. `cd server`
-
 2. Run `node server.js`
 
 ### Frontend (Client)
 
 1. `cd client`
-2. 
-3. Run `npm start`
+2. Run `npm start`
 
 ## Deployment
 
