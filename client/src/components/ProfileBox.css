@@ -1,0 +1,196 @@
+/* Profile Wrapper */
+.profile-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 40px auto;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+/* Profile Attribute Box */
+.profile-attribute-box {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    background-color: #ffffff;
+    color: #333;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Avatar Section */
+.profile-avatar-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.edit-icon-container {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.edit-avatar-icon {
+    width: 20px;
+    height: 20px;
+    filter: invert(100%);
+}
+
+.username-display {
+    font-size: 1.5rem;
+    margin-top: 15px;
+}
+
+/* Bio Section */
+.profile-bio-section {
+    margin-top: 20px;
+}
+
+.profile-bio-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.bio-textarea {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.bio-textarea[readonly] {
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+}
+
+.bio-buttons {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.edit-bio-button,
+.save-bio-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-bio-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.save-bio-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.edit-bio-button:hover {
+    background-color: #0056b3;
+}
+
+.save-bio-button:hover {
+    background-color: #218838;
+}
+
+/* People List */
+.profile-people-box {
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    background-color: #ffffff;
+    color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    overflow: hidden;
+    height: fit-content;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.people-title {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.people-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.people-list-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.people-list-item:hover {
+    background-color: #f1f1f1;
+}
+
+.people-list-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.people-list-username {
+    font-size: 1rem;
+    color: #333;
+}
+
+.people-list-empty {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-attribute-box,
+    .profile-people-box {
+        margin: 10px;
+        width: 90%;
+    }
+}
