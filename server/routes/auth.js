@@ -49,6 +49,22 @@ router.post('/login', async (req, res) => {
         console.error(error);
         res.status(500).json({ error: error });
     }
+});
+
+router.get('/search', async (req, res) => {
+    const { username } = req.query;
+
+    if (!username) {
+        return res.status(400).json({ error: 'Username is required.' });
+    }
+
+    try {
+        const users = await User.find({ username: new RegExp(username, 'i') }).limit(10);
+        res.json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error });
+    }
 })
 
 module.exports = router;
