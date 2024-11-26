@@ -35,7 +35,7 @@ function StarRating({ handleRating, size, rating, canChange=true }) {
                     ) : (
                         <FaStar
                             size={size}
-                            color={"orange"}
+                            color={currentRating <= rating ? "orange" : "gray"}
                         /> )
                     }                    
                     </label>

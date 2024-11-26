@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles.css';
 import ReactMarkdown from 'react-markdown';
+import './GameDetailPage.css';
 import StarRating from '../components/StarRating';
 import { UserContext } from '../context/UserContext';
 
@@ -147,12 +148,30 @@ function GameDetailPage() {
             </div>
 
 
+
             <div className="game-screenshots">
                 <h2>Screenshots</h2>
                 {game.screenshot_urls?.length ? (
                     game.screenshot_urls.map((url, index) => (
                         <img key={index} src={url} alt={`Screenshot ${index + 1}`} className="game-screenshot"/>
                     ))
+
+            <div className="reviews-section">
+                <h2>Reviews</h2>
+                {reviews.length ? (
+                    <ul>
+                        {reviews.map((review) => (
+                            <li key={review._id} className="review-item">
+                                <StarRating rating={review.rating} canChange={false}/>
+                                <p>
+                                    By: <strong>{review.userId.username}</strong> 
+                                </p>
+                                <p className="review-contents">"{review.review}"</p>
+                                <p>Last Updated: {new Date(review.updatedAt).toLocaleString()}</p>
+                            </li>
+                        ))}
+                    </ul>
+
                 ) : (
                     <p>No screenshots available.</p>
                 )}

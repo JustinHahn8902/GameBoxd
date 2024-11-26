@@ -12,8 +12,8 @@ function MyListsPage() {
     useEffect(() => {
         const fetchLists = async () => {
             try {
-                const response = await axios.get(`http://localhost:5001/api/lists/user/${user._id}`, {
-                    data: { requestingUserId: user._id }
+                const response = await axios.get(`http://localhost:5000/api/lists/user/${user._id}`, {
+                    params: { requestingUserId: user._id }
                 });
                 setLists(response.data);
             } catch (error) {

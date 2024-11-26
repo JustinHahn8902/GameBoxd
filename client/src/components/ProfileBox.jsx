@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import DefaultAvatar from '../assets/default-avatar.svg';
 import EditAvatar from '../assets/edit-avatar.svg';
 import '../styles.css';
@@ -12,12 +12,6 @@ function ProfileBox() {
     const [bio, setBio] = useState(user?.bio || '');
     const [changedBio, setChangedBio] = useState(false);
     const [readOnlyBio, setReadOnlyBio] = useState(true);
-
-    useEffect(() => {
-        console.log(user);
-        console.log(bio);
-    }, []);
-
     const navigate = useNavigate();
 
     const handleChangeImage = () => {
@@ -57,49 +51,71 @@ function ProfileBox() {
         console.log(user);
     }
 
-    return (
-        <div className='profile-attribute-box'>
-
-            <p className='profile-title'>Profile</p>
-
-            <div className='profile-username-card'>
-                <div className='profile-username-left'>
-                    <p>Username:</p>
-                </div>
-                <div className='profile-username-right'>
-                    <p>{user ? user.username : 'N/A'}</p>
-                </div>
+    const PeopleList = ({ title, items, handleClick }) => {
+        return (
+            <div className='profile-people-box'>
+                <p>{title}</p>
+                <ul id='people-list'>
+                    {items.map((item, index) => (
+                        <li key={index} onClick={() => handleClick(item)}>
+                            {item}
+                        </li>
+                    ))}
+                </ul>
             </div>
+        );
+    };
 
-            <div className='profile-avatar-card'>
-                <div className='profile-avatar-left'>
-                    <p>Avatar:</p>
-                </div>
-                <div className='profile-avatar-right'>
-                    <div className='profile-avatar-container'>
-                        <img src={avatar} className='profile-avatar' />
-                        <img src={EditAvatar} className='edit-avatar' onClick={handleChangeImage}/>
-                        <input id="file-input" type="file" accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
+    const clickOnPerson = (person) => {
+        navigate('/fol-user', { state: { user: person }});
+    }
+
+    return (
+        <div className='profile-wrapper'>
+            <PeopleList title='Followers:' items={user?.followers} handleClick={clickOnPerson} />
+            <div className='profile-attribute-box'>
+
+                <p className='profile-title'>Profile</p>
+
+                <div className='profile-username-card'>
+                    <div className='profile-username-left'>
+                        <p>Username:</p>
+                    </div>
+                    <div className='profile-username-right'>
+                        <p>{user ? user.username : 'N/A'}</p>
                     </div>
                 </div>
-            </div>
 
-            <div className='profile-bio-card'>
-                <div className='profile-bio-left'>
-                    <p>Bio:</p>
+                <div className='profile-avatar-card'>
+                    <div className='profile-avatar-left'>
+                        <p>Avatar:</p>
+                    </div>
+                    <div className='profile-avatar-right'>
+                        <div className='profile-avatar-container'>
+                            <img src={avatar} className='profile-avatar' />
+                            <img src={EditAvatar} className='edit-avatar' onClick={handleChangeImage}/>
+                            <input id="file-input" type="file" accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
+                        </div>
+                    </div>
                 </div>
-                <div className='profile-bio-right'>
-                    <textarea rows={8} defaultValue={bio} value={bio} onChange={handleBioChange} placeholder='Input a bio' readOnly={readOnlyBio} spellCheck={false} />
-                    <button onClick={() => {setReadOnlyBio(false)}}>
-                        Edit Bio
-                    </button>
-                </div>
-            </div>
 
-            <button className='profile-save-changes-button' onClick={handleSaveChanges}>
-                Save Changes
-            </button>
-            <button className='profile-back-to-home-button' onClick={() => {navigate('/')}}>Home</button>
+                <div className='profile-bio-card'>
+                    <div className='profile-bio-left'>
+                        <p>Bio:</p>
+                    </div>
+                    <div className='profile-bio-right'>
+                        <textarea rows={8} defaultValue={bio} value={bio} onChange={handleBioChange} placeholder='Input a bio' readOnly={readOnlyBio} spellCheck={false} />
+                        <button onClick={() => {setReadOnlyBio(false)}}>
+                            Edit Bio
+                        </button>
+                    </div>
+                </div>
+
+                <button className='profile-save-changes-button' onClick={handleSaveChanges}>
+                    Save Changes
+                </button>
+            </div>
+            <PeopleList title='Following:' items={user?.following} handleClick={clickOnPerson} />
         </div>
     );
 }
