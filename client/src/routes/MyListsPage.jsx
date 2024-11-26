@@ -12,7 +12,7 @@ function MyListsPage() {
     useEffect(() => {
         const fetchLists = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/lists/user/${user._id}`, {
+                const response = await axios.get(`http://localhost:5001/api/lists/user/${user._id}`, {
                     data: { requestingUserId: user._id }
                 });
                 setLists(response.data);
@@ -26,7 +26,7 @@ function MyListsPage() {
 
     const handleCreateList = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/lists', {
+            const response = await axios.post('http://localhost:5001/api/lists', {
                 name: newListName,
                 userId: user._id,
                 isPublic
@@ -40,7 +40,7 @@ function MyListsPage() {
 
     const handleDeleteList = async (listId) => {
         try {
-            await axios.delete(`http://localhost:5000/api/lists/${listId}`);
+            await axios.delete(`http://localhost:5001/api/lists/${listId}`);
             setLists(lists.filter(list => list._id !== listId));
         } catch (error) {
             console.error('Error deleting list:', error);
@@ -49,7 +49,7 @@ function MyListsPage() {
 
     const handleTogglePrivacy = async (listId, currentPrivacy) => {
         try {
-            const response = await axios.patch(`http://localhost:5000/api/lists/${listId}`, {
+            const response = await axios.patch(`http://localhost:5001/api/lists/${listId}`, {
                 isPublic: !currentPrivacy
             });
             setLists(lists.map(list => list._id === listId ? response.data : list));

@@ -1,6 +1,14 @@
 const express = require('express');
 const Game = require('../models/Game');
 
+const { Configuration, OpenAIApi } = require('openai');
+
+const configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
+
+
 const router = express.Router();
 
 router.get('/search', async (req, res) => {
@@ -62,6 +70,28 @@ router.post('/similar', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error.' });
+    }
+});
+
+router.post('/generate-description', async (req, res) => {
+    const { description, images } = req.body;
+    try {
+        const prompt = `
+        Create an engaging, detailed game description based on the following details:
+        Description: ${description}
+        Images: ${images.map((image, index) => `Image ${index + 1}: ${image}`).join('\n')}
+        Provide a comprehensive, vivid description suitable for a game review.
+        `;
+
+        const response = await openai.createChatCompletion({
+            model: 'gpt-4',
+            messages: [{ role: 'user', content: prompt }],
+            max_tokens: 300,
+        });
+
+        res.json({ enhancedDescription: response.data.choices[0].message.content });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to generate description', details: error.message });
     }
 });
 

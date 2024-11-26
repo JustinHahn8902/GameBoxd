@@ -15,7 +15,7 @@ function Navbar() {
         event.preventDefault();
         if (query.trim()) {
             try {
-                const response = await axios.get(`http://localhost:5000/api/games/search?name=${query}`);
+                const response = await axios.get(`http://localhost:5001/api/games/search?name=${query}`);
                 setSearchResults(response.data);
             } catch (error) {
                 console.error('Error fetching search results:', error);

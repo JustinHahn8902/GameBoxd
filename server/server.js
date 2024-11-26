@@ -2,7 +2,7 @@ require('dotenv').config(); // Load environment variables
 const mongoose = require('mongoose');
 const createApp = require('./app'); // Import the refactored app
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {

@@ -668,3 +668,20 @@ body {
 .list-item button:hover {
     background-color: #cc0000;
 }
+
+.enhanced-description-section {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.enhanced-description-section h2 {
+    margin-bottom: 10px;
+}
+
+.enhanced-description-section p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
