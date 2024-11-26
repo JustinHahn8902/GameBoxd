@@ -18,7 +18,7 @@ function PeopleList({ title, items, handleClick }) {
                                 alt={`${person.username}'s avatar`}
                                 className="people-list-avatar"
                             />
-                            <span className="people-list-username">{person.username}</span>
+                            <span className="people-list-username">{person}</span>
                         </li>
                     ))
                 ) : (
