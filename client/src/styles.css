@@ -685,3 +685,23 @@ body {
     font-size: 1rem;
     line-height: 1.5;
 }
+
+.enhanced-description-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 1rem;
+}
+
+.enhanced-description-section p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.enhanced-description-section ul {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+}
+
+.enhanced-description-section li {
+    margin-bottom: 0.5rem;
+}
+
