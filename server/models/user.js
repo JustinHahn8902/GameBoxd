@@ -22,12 +22,12 @@ const userSchema = new mongoose.Schema({
         default: null,
     },
     followers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        type: String,
+        // ref: "List",
     }],
     following: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        type: String,
+        // ref: "List"
     }],
     lists: [{
         type: mongoose.Schema.Types.ObjectId,

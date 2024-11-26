@@ -11,6 +11,12 @@ html, body {
     align-items: center;
 }
 
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .profile {
     height: inherit;
     width: inherit;
@@ -21,9 +27,34 @@ html, body {
     padding-top: 20px;
 }
 
+.profile-wrapper {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.profile-people-box {
+    height: inherit;
+    background-color: #856970;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 20px;
+}
+
+#people-list li {
+    padding-bottom: 10px;
+    list-style-type: none;
+}
+
+#people-list li:hover {
+    background-color: #655960;
+}
+
 .profile-attribute-box {
     height: inherit;
-    width: 50vw;
+    width: 40vw;
     background-color: #856970;
     display: flex;
     flex-direction: column;
@@ -481,6 +512,7 @@ body {
 }
 
 .main-content {
+    width: 100vw;
     padding-top: 60px; /* Adjust this value based on the height of your navbar */
 }
 

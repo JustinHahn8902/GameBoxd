@@ -3,6 +3,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const gameRoutes = require('./routes/games');
 const listRoutes = require('./routes/lists');
+const usersRoutes = require('./routes/users');
 
 const createApp = () => {
   const app = express();
@@ -20,6 +21,7 @@ const createApp = () => {
   app.use('/api/auth', authRoutes);
   app.use('/api/games', gameRoutes);
   app.use('/api/lists', listRoutes);
+  app.use('/api/users', usersRoutes);
 
 
   return app;
