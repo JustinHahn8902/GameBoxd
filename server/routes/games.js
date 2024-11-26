@@ -14,6 +14,33 @@ router.get('/search', async (req, res) => {
     }
 });
 
+router.get('/popular', async (req, res) => {
+    try {
+        const games = await Game.find({ total_rating_count: { $gt: 100 } })
+            .sort({ total_rating: -1 })
+            .limit(25)
+            .select('name cover_url igdb_id');
+        res.json(games);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error.' });
+    }
+});
+
+router.get('/genre/:genre', async (req, res) => {
+    const genre = req.params.genre;
+    try {
+        const games = await Game.find({ genres: new RegExp(genre, 'i') })
+            .sort({ total_rating: -1 })
+            .limit(25)
+            .select('name cover_url igdb_id');
+        res.json(games);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error.' });
+    }
+});
+
 router.get('/:id', async (req, res) => {
     try {
         const game = await Game.findOne({ igdb_id: req.params.id });
@@ -37,7 +64,5 @@ router.post('/similar', async (req, res) => {
         res.status(500).json({ error: 'Internal server error.' });
     }
 });
-
-
 
 module.exports = router;
