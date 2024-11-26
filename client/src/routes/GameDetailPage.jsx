@@ -238,11 +238,6 @@ function GameDetailPage() {
                             }).games.map((game) => {
                                 return game._id
                             }))
-                            console.log(lists.find((list) => {
-                                return list._id === e.target.value;
-                            }).games.map((game) => {
-                                return game._id
-                            }));
                         }}
                         defaultValue=""
                     >
