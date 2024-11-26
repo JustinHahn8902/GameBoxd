@@ -10,6 +10,7 @@ import GameDetailPage from './routes/GameDetailPage';
 import Navbar from './components/NavBar';
 import MyListsPage from './routes/MyListsPage';
 import { UserContext } from './context/UserContext';
+import FolProfilePage from './routes/FolProfilePage';
 
 function App() {
   const { user } = useContext(UserContext);
@@ -25,6 +26,7 @@ function App() {
           <Route path="/profile" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>} />
           <Route path="/game/:id" element={<ProtectedRoute><GameDetailPage/></ProtectedRoute>} />
           <Route path="/my-lists" element={<ProtectedRoute><MyListsPage/></ProtectedRoute>} />
+          <Route path="/fol-user" element={<ProtectedRoute><FolProfilePage /></ProtectedRoute>} />
         </Routes>
       </div>
     </>
