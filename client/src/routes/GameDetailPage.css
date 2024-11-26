@@ -133,7 +133,7 @@
 }
 
 .review-textarea {
-    width: 100%;
+    width: 97.5%;
     height: 100px;
     margin-top: 10px;
     border-radius: 5px;
@@ -185,6 +185,13 @@
 
 .review-item strong {
     color: white;
+}
+
+.review-item .review-contents {
+    font-size: 18px;
+    margin: 10px;
+    font-style: italic;
+    color: antiquewhite;
 }
 
 /* Responsive Design */
