@@ -1,19 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles.css';
 import StarRating from '../components/StarRating';
+import { UserContext } from '../context/UserContext';
 
 function GameDetailPage() {
+    const doneLoading = 3;
+
+    const { user } = useContext(UserContext);
+
     const { id } = useParams();
     const navigate = useNavigate();
     const [game, setGame] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(0);
     const [error, setError] = useState('');
     const [similarGames, setSimilarGames] = useState([]);
     const [review, setReview] = useState('');
+    const [rating, setRating] = useState(0);
+    const [reviewButtonText, setReviewButtonText] = useState("Submit");
+    const [userHasReview, setUserHasReview] = useState(false);
+    const [reviewDisabled, setReviewDisabled] = useState(false);
+    const [reviews, setReviews] = useState([]);
+
 
     useEffect(() => {
+        setLoading(0);
+        setReview('');
+        setRating(0);
+        setUserHasReview(false);
+        setReviewDisabled(false);
+        setError('');
+        setReviews([]);
+
         const fetchGame = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/api/games/${id}`);
@@ -28,23 +47,107 @@ function GameDetailPage() {
             } catch (error) {
                 setError(error.response?.data?.error || 'Error fetching game details.');
             } finally {
-                setLoading(false);
+                setLoading(loading => {
+                    return loading + 1;
+                });
             }
         };
 
+        const fetchUserRating = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/api/rating/user-rating/${user._id}/${id}`);
+                setRating(response?.data?.rating?.rating || 0);
+                if (response.data?.rating?.review) {
+                    setReview(response.data.rating.review);
+                    setUserHasReview(true);
+                    setReviewDisabled(true);
+                }
+            } catch (error) {
+                setError(error.response?.data?.error || 'Error fetching user rating.');
+            } finally {
+                setLoading(loading => {
+                    return loading + 1;
+                });
+            }
+        }
+
+        const fetchReviews = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/api/rating/reviews/${id}`);
+                console.log(response);
+                setReviews(response.data.reviews.filter((review) => {
+                    return review.userId._id !== user._id;
+                }) || []);
+            } catch (error) {
+                setError(error.response?.data?.error || 'Error fetching reviews.');
+            } finally {
+                setLoading(loading => {
+                    return loading + 1;
+                });
+            }
+        }
+
         fetchGame();
+        fetchUserRating();
+        fetchReviews();
     }, [id]);
 
-    const handleRating = (rating) => {
-        // put rating backend logic here
+    const handleRating = async (rating) => {
+        setRating(rating);
+        try {
+            await axios.post(`http://localhost:5000/api/rating/user-rating/${user._id}/${id}`, {
+                rating: rating,
+                review: review
+            })
+        } catch (error) {
+            setError(error.response?.data?.error || 'Error posting rating.');
+        }
+        
     };
 
-    const handleReviewSubmit = () => {
-        alert('Thank you for your review!');
-        setReview('');
-    };
+    const handleReviewSubmit = async () => {
+        if (rating === 0) {
+            alert("Please Rate the Game before Submitting a Review!");
+        } else if (review.length === 0) {
+            alert("Please Write a Review!");
+        } else {
+            try {
+                await axios.post(`http://localhost:5000/api/rating/user-rating/${user._id}/${id}`, {
+                    rating: rating,
+                    review: review
+                })
+            } catch (error) {
+                setError(error.response?.data?.error || 'Error posting review.');
+            }
+            setUserHasReview(true);
+            setReviewDisabled(true);
+        }
+    }
 
-    if (loading) {
+    const handleReviewEdit = () => {
+        setUserHasReview(true);
+        setReviewDisabled(false);
+    }
+
+    const handleSaveReview = async () => {
+        if (review.length === 0) {
+            alert("Please Write a Review!");
+        } else {
+            try {
+                await axios.post(`http://localhost:5000/api/rating/user-rating/${user._id}/${id}`, {
+                    rating: rating,
+                    review: review
+                });
+                setReviewDisabled(true);
+                setUserHasReview(true);
+            } catch (error) {
+                setError(error.response?.data?.error || 'Error saving review.');
+            }
+        }
+    };
+    
+
+    if (loading < doneLoading) {
         return <div>Loading...</div>;
     }
 
@@ -60,7 +163,7 @@ function GameDetailPage() {
         <div className="game-detail">
             <h1>{game.name || 'Unknown Game'}</h1>
             <img src={game.cover_url || 'placeholder-image-url'} alt={game.name} className="game-cover" />
-            <StarRating handleRating={handleRating} />
+            <StarRating handleRating={handleRating} size={40} rating={rating} />
             <p><strong>Genres:</strong> {game.genres?.join(', ') || 'N/A'}</p>
             <p><strong>Release Date:</strong> {game.release_date ? new Date(game.release_date).toLocaleDateString() : 'N/A'}</p>
             <p><strong>Average User Rating:</strong> {game.total_rating ? `${game.total_rating.toFixed(1) / 10} (${game.total_rating_count} votes)` : 'N/A'}</p>
@@ -105,18 +208,56 @@ function GameDetailPage() {
                     <p>No similar games available.</p>
                 )}
             </div>
+            
             <div className="leave-review">
-                <h2>Leave a Review</h2>
+                <span className="leave-review-header">
+                    <h2 className="leave-review-text">{ userHasReview ? "Your Review" : "Leave a Review" }:</h2>
+                    <StarRating handleRating={handleRating} size={20} rating={rating}/>
+                </span>
                 <textarea
+                    disabled={reviewDisabled}
                     className="review-textarea"
                     placeholder="Write your review here..."
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
                 ></textarea>
-                <button className="review-submit-button" onClick={handleReviewSubmit}>
-                    Submit Review
-                </button>
+                {userHasReview ? (
+                    reviewDisabled ? (
+                        <button className="review-submit-button" onClick={handleReviewEdit}>
+                            Edit
+                        </button>
+                    ) : (
+                        <button className="review-submit-button" onClick={handleSaveReview}>
+                            Save
+                        </button>
+                    )
+                ) : (
+                    <button className="review-submit-button" onClick={handleReviewSubmit}>
+                        Submit
+                    </button>
+                )}
             </div>
+
+            <div className="reviews-section">
+                <h2>Reviews</h2>
+                {reviews.length ? (
+                    <ul>
+                        {reviews.map((review) => (
+                            <li key={review._id} className="review-item">
+                                <StarRating rating={review.rating} canChange={false}/>
+                                <p>
+                                    By: <strong>{review.userId.username}</strong> 
+                                </p>
+                                <p>{review.review}</p>
+                                <p>Last Updated: {new Date(review.updatedAt).toLocaleString()}</p>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No reviews available for this game.</p>
+                )}
+            </div>
+
         </div>
     );
 }

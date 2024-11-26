@@ -537,6 +537,27 @@ body {
     margin-top: 30px;
 }
 
+.leave-review-text {
+    margin-right: 10px;
+}
+
+.leave-review-header {
+    display: flex;
+    align-items: center;
+}
+
+.reviews-section {
+    margin-top: 20px;
+}
+
+.review-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
 .review-textarea {
     width: 90%;
     height: 100px;
