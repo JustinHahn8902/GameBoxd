@@ -61,6 +61,8 @@ body {
   
   .hero-title {
     font-size: 2.5rem;
+    text-shadow: 1px 1px white;
+    text-shadow: #f0f0f0;
     font-weight: bold;
     margin-bottom: 0px;
     color: #fd00a9;
@@ -73,12 +75,13 @@ body {
   
   /* Featured Games Section */
   .featured-games {
-    padding: 40px 20px;
+    padding: 20px 20px;
     text-align: center;
   }
   
   .section-title {
     font-size: 2rem;
+    text-shadow: 1px 1px white;
     margin-bottom: 20px;
     color: #fd00a9;
   }
@@ -86,15 +89,16 @@ body {
   .featured-games-container {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
     flex-wrap: wrap;
     margin-top: 20px;
   }
   
   .game-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(43, 40, 40, 0.911);
     border-radius: 10px;
     padding: 20px;
+    height: auto;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -102,7 +106,7 @@ body {
   }
   
   .game-card:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgb(0, 0, 0);
   }
   
   .game-card-image {
@@ -112,7 +116,7 @@ body {
   }
   
   .game-card-title {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: white;
     text-align: center;
@@ -137,6 +141,7 @@ body {
   
   .game-list-item:hover {
     color: #fd00a9;
+    text-emphasis-color: white;
   }
   
 
@@ -212,6 +217,7 @@ body {
   .carousel-item-title {
     font-size: 1.1rem;
     color: #ffffff;
+    text-shadow: 2px 2px black;
   }
   
   /* Horizontal Scrolling */

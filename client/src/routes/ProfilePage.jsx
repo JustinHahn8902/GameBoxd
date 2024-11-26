@@ -1,5 +1,5 @@
 import ProfileBox from '../components/ProfileBox';
-import '../styles.css';
+import './ProfilePage.css';
 
 function ProfilePage() {
 
