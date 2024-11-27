@@ -1,21 +1,21 @@
 /* General Styling for Game Detail Page */
 .game-detail {
     position: relative;
-    background: #1e1e1e;
+    background: #c4c1c1;
     color: white;
     padding: 20px;
     border-radius: 10px;
     margin: 20px auto;
     max-width: 900px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgb(255, 255, 255);
     font-family: Arial, sans-serif;
 }
 
 /* Close Button Styling */
 .close-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     background: transparent;
     border: none;
     font-size: 2rem;
@@ -23,6 +23,7 @@
     color: white;
     cursor: pointer;
     transition: color 0.3s;
+    z-index: 100;
 }
 
 .game-detail-background {
@@ -31,7 +32,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(226, 223, 223, 0.699);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,12 +40,12 @@
 }
 
 .game-detail {
-    background-color: #1e1e1e;
+    background-color: #504c4f;
     color: white;
     padding: 20px;
     border-radius: 10px;
     max-width: 900px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
     position: relative;
 }
 
@@ -335,4 +336,14 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.game-detail-container {
+    position: relative;
+    background: rgba(0, 0, 0, 0.8); /* Dimmed background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
 }

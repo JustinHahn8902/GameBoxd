@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate} from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 import './ListPage.css';
@@ -7,7 +7,6 @@ import './ListPage.css';
 function ListPage() {
     const { user } = useContext(UserContext);
     const { listId } = useParams();
-
     const navigate = useNavigate();
 
     const [games, setGames] = useState([]);
@@ -38,18 +37,26 @@ function ListPage() {
     return (
         <div className="list-page">
             {error && <p className="error">{error}</p>}
-            <h1>{listName}</h1>
+            <h1>{listName || 'My Game List'}</h1>
             <div className="games-container">
-                {games.map((game) => (
-                    <div key={game._id} className="game-item" onClick={() => handleGameClick(game.igdb_id)}>
-                        <img
-                            src={game.cover_url || 'placeholder-image-url'}
-                            alt={game.name}
-                            className="game-image"
-                        />
-                        <p className="game-name">{game.name}</p>
-                    </div>
-                ))}
+                {games.length > 0 ? (
+                    games.map((game) => (
+                        <div
+                            key={game._id}
+                            className="game-item"
+                            onClick={() => handleGameClick(game.igdb_id)}
+                        >
+                            <img
+                                src={game.cover_url || 'placeholder-image-url'}
+                                alt={game.name}
+                                className="game-image"
+                            />
+                            <p className="game-name">{game.name}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p className="empty-message">No games found in this list.</p>
+                )}
             </div>
         </div>
     );
