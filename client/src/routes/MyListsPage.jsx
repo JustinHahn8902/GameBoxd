@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
-import '../styles.css';
+import './MyProfilePage.css';
 
 function MyListsPage() {
     const { user } = useContext(UserContext);
