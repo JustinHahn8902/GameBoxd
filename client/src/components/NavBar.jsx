@@ -155,7 +155,6 @@ function Navbar() {
                         <p onClick={() => navigate('/profile')}>Profile</p>
                         <p onClick={() => navigate('/settings')}>Settings</p>
                         <p onClick={() => navigate('/my-lists')}>My Lists</p>
-                        <p onClick={() => navigate('/user-search')}>User Search</p>
                         <p
                             onClick={() => {
                                 logout();
