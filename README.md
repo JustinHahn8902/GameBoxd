@@ -27,6 +27,19 @@ Before running the application, ensure you have the following installed:
 - [Node.js](https://nodejs.org/) (version 14 or higher)
 - [npm](https://www.npmjs.com/)
 
+### Dependent Libraries:
+The following third-party libraries are required and will be installed automatically:
+
+#### Backend:
+- Express.js
+- MongoDB (optional: Atlas or local installation)
+#### Frontend:
+- React
+- Axios
+
+### Download Instructions:
+Clone the GitHub repository (`git clone [repository_url]`).
+
 ### Running the Application:
 
 #### Backend (Server):
@@ -39,18 +52,27 @@ Before running the application, ensure you have the following installed:
 
 1. Run `npm start`
 
+#### Access the application in your web browser at http://localhost:3000.
+
 ### Deployment:
 
-- Host the backend using platforms like Heroku or AWS, ensuring proper configuration of environment variables.
+- Host the backend using platforms like Heroku or AWS, ensuring proper configuration of environment variables
 - Deploy the frontend to static hosting services like Netlify or Vercel.
 - Update the API base URL in the frontend to point to the deployed backend.
 
+### Troubleshooting:
+- Port already in use error
+  - Ensure no other applications are using the same port or modify the port number in the backend configuration. 
+- Database connection error
+  - Verify MongoDB is running and the connection string is correct in .env. 
+- Frontend not loading
+  - Ensure the React server is running without errors in the terminal.
+
 ## Contributing:
-1. Fork this repository (`git clone [clone_url]`).
-2. Create a feature branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -m 'Added [feature]'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Create a pull request (on github itself).
+1. Create a feature branch (`git checkout -b feature-branch`).
+2. Commit your changes (`git commit -m 'Added [feature]'`).
+3. Push to the branch (`git push origin feature-branch`).
+4. Create a pull request (on GitHub itself).
 
 ## License:
 This project is licensed under the MIT License - see the LICENSE file for details.
