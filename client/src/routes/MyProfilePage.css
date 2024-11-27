@@ -1,0 +1,150 @@
+/* General Styling for MyListsPage */
+.my-lists-page {
+    background-color: #1e1e1e;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 900px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: auto;
+}
+
+.my-lists-page h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fd00a9;
+    margin-bottom: 20px;
+}
+
+/* Create List Form */
+.create-list-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.create-list-form input[type="text"] {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #2a2a2a;
+    color: white;
+    outline: none;
+    width: 2500px;
+    transition: box-shadow 0.3s ease;
+}
+
+.create-list-form input[type="text"]:focus {
+    box-shadow: 0 0 8px rgba(255, 20, 147, 0.5);
+}
+
+.my-lists-checkbox-label {
+    font-size: 1rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.create-list-form button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #fd00a9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.create-list-form button:hover {
+    background-color: #ff1fb9;
+    box-shadow: 0 4px 8px rgba(255, 20, 147, 0.5);
+}
+
+/* Lists Container */
+.lists-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    width: 100%px;
+}
+
+/* Individual List Item */
+.list-item {
+    background-color: #2a2a2a;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    position: relative;
+    
+}
+
+.list-item h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+    
+}
+
+.list-item button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #fd00a9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.list-item button:hover {
+    background-color: #ff1fb9;
+    transform: translateY(-2px);
+}
+
+.list-item button:active {
+    transform: translateY(1px);
+}
+
+/* Empty State Message */
+.lists-container .empty-message {
+    font-size: 1.2rem;
+    color: #ccc;
+    text-align: center;
+}
+
+/* Error Message */
+.error {
+    color: red;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .create-list-form {
+        flex-direction: column;
+    }
+
+    .create-list-form input[type="text"] {
+        width: 100%;
+    }
+
+    .list-item button {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+}
