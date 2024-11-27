@@ -95,6 +95,10 @@ h1, h2 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.list-item strong {
+    color:black;
+    margin: 0;
+}
 .list-item h3 {
     color:black;
     margin: 0;
@@ -113,4 +117,14 @@ h1, h2 {
 .list-item ul li {
     margin: 5px 0;
 }
+
+/* Game Button Styling */
+.game-button {
+    background: white;
+    border: none;
+    color: #007BFF;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 
