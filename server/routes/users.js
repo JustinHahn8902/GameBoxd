@@ -50,8 +50,11 @@ router.get('/:userId/lists', async (req, res) => {
             return res.status(400).json({ error: 'Invalid user ID' });
         }
 
-        // Fetch the user's lists
-        const lists = await List.find({ user: userId }).populate('games');
+        // Fetch the user's lists and populate only the 'name' field of games
+        const lists = await List.find({ user: userId }).populate({
+            path: 'games',
+            select: 'name',
+        });
         console.log(`Fetched lists for user ${userId}: ${JSON.stringify(lists, null, 2)}`);
 
         if (!lists.length) {
@@ -65,6 +68,7 @@ router.get('/:userId/lists', async (req, res) => {
         return res.status(500).json({ error: 'Error fetching user lists' });
     }
 });
+
 
 
 module.exports = router;

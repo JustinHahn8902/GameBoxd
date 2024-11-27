@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import axios from 'axios';
 import Navbar from '../components/NavBar'; // Import the Navbar
 import './UserSearchPage.css';
@@ -8,6 +9,7 @@ function UserSearchPage() {
     const [users, setUsers] = useState([]);
     const [selectedUserLists, setSelectedUserLists] = useState([]);
     const [error, setError] = useState('');
+    const navigate = useNavigate(); // Initialize navigate
 
     // Search users by username
     const handleSearch = async (e) => {
@@ -74,8 +76,8 @@ function UserSearchPage() {
                                         <ul>
                                             {list.games.map((game) => (
                                                 <li key={game._id}>
-                                                    <strong>{game.name}</strong>
-                                                    <p>{game.summary}</p>
+
+                                                    <p>{game.name}</p>
                                                 </li>
                                             ))}
                                         </ul>
