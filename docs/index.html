@@ -7,37 +7,124 @@
 
 <body>
     <div id="page">
-		
+
         <div id="header">
         	<h1>GameBoxd Report</h1>
             <h2>CS 3300: Group 12</h2>
         </div>
-       
+
         <div class="contentTitle">
             <h1>Introduction/Background</h1>
         </div>
         <div class="contentText">
-          <p>You may use this template on any site, anywhere, for free just<strong> please leave the link back to me in the footer</strong>. This template validates XHTML 1.1, CSS Validates as well; enjoy :) </p>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer mi. Vivamus sit amet neque vitae sapien bibendum sodales. Curabitur elementum. Duis imperdiet. Donec eleifend porttitor sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis. Sed vehicula pellentesque quam.</p>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer mi. Vivamus sit amet neque vitae sapien bibendum sodales. Curabitur elementum. Duis imperdiet. Donec eleifend porttitor sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis. Sed vehicula pellentesque quam.</p>
+          <p>
+            Our aim for Project 2 was to build a social cataloging platform, similar to Letterboxd, for video game enthusiasts, providing features such as game cataloging, 
+            reviews, ratings, and creating/viewing lists. Furthermore, we also included the additive feature of AI-generated game descriptions, seeking to provide a
+            more genuine and honest take on what each game offers.
+            This platform seeks to bridge the gap between gamers and their desire to share experiences, discover new games, 
+            and engage with a community that values thoughtful discussions and curation. By offering tools for users to write reviews, rate titles, 
+            and craft personalized lists, the platform aspires to become a go-to destination for gaming enthusiasts to connect and explore.
+          </p>
+          <p>
+            To achieve this, we employed a technology stack tailored for scalability, usability, and performance.
+            The backend is powered by Node.js and Express, providing a robust and flexible API layer to handle user interactions and data storage. 
+            For the database, we chose MongoDB, which allows for efficient handling of the semi-structured data typical in game metadata, user reviews, and ratings. 
+            The frontend is built using React.js, delivering a responsive and interactive user experience.
+          </p>
+          <p>
+            This project is significant because it addresses the lack of a centralized platform where gamers can both curate their personal game collections 
+            and interact socially around shared interests. Existing platforms like Metacritic and IGN offer reviews and ratings but lack the personalized 
+            cataloging and community-driven features central to our project. Our approach combines the best elements of social media and cataloging platforms, 
+            providing a unique space for gamers to engage.
+          </p>
+          <p>
+            The scope of the project includes the development of core features like user registration/login, game search and cataloging, review and rating submission, 
+            and the ability to create and share lists. We also plan to implement social features such as following other users and interacting with their reviews and lists.
+            Our project management approach follows an Agile methodology, emphasizing iterative development, frequent user feedback, and adaptability to changing requirements.
+          </p>
         </div>
 
         <div class="contentTitle">
             <h1>Software Technologies</h1>
         </div>
         <div class="contentText">
-          <p>You may use this template on any site, anywhere, for free just<strong> please leave the link back to me in the footer</strong>. This template validates XHTML 1.1, CSS Validates as well; enjoy :) </p>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer mi. Vivamus sit amet neque vitae sapien bibendum sodales. Curabitur elementum. Duis imperdiet. Donec eleifend porttitor sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis. Sed vehicula pellentesque quam.</p>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer mi. Vivamus sit amet neque vitae sapien bibendum sodales. Curabitur elementum. Duis imperdiet. Donec eleifend porttitor sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis. Sed vehicula pellentesque quam.</p>
+          <p><strong>Technologies and Frameworks</strong></p>
+          <ol>
+            <li><strong>IGDB API:</strong> The IGDB (Internet Game Database) API was integral to our platform,
+              serving as the primary source for game metadata. It provides a comprehensive database of video game information,
+              including titles, genres, platforms, and cover art.
+              The IGDB API was chosen for its reliability, extensive dataset, and ease of integration, enabling users to quickly find accurate and detailed information
+              about their favorite games or discover new ones to explore.
+            </li>
+            <li><strong>Jest:</strong> For testing, we utilized Jest, a widely used JavaScript testing framework.
+              Jest was chosen for its simplicity, fast performance, and powerful mocking capabilities.
+              It allowed us to implement unit tests efficiently, ensuring the reliability of our platform’s core functionalities,
+              from API interactions to user-generated content features like reviews and lists.
+            </li>
+          </ol>
+          <p><strong>AI Tools</strong></p>
+          <ol>
+            <li><strong>Github Copilot:</strong> Played a crucial role in streamlining development.
+              It provided context-aware code suggestions and assisted with boilerplate generation, enabling us to work more efficiently and focus on complex problem-solving. 
+              Copilot was particularly helpful when integrating the IGDB API and implementing user-facing features, reducing development time while improving code quality.
+            </li>
+            <li><strong>ChatGPT API:</strong> The ChatGPT API was used to generate AI-driven game descriptions.
+              This tool added significant value to the platform by offering personalized, marketing-free summaries that highlight the core reasons
+              why a player might enjoy a particular game.
+              The ChatGPT API was selected for its state-of-the-art language processing capabilities and its ability to deliver high-quality,
+              natural language outputs tailored to our audience’s preferences.
+            </li>
+          </ol>
         </div>
 
         <div class="contentTitle">
             <h1>Requirements</h1>
         </div>
         <div class="contentText">
-          <p>You may use this template on any site, anywhere, for free just<strong> please leave the link back to me in the footer</strong>. This template validates XHTML 1.1, CSS Validates as well; enjoy :) </p>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer mi. Vivamus sit amet neque vitae sapien bibendum sodales. Curabitur elementum. Duis imperdiet. Donec eleifend porttitor sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis. Sed vehicula pellentesque quam.</p>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer mi. Vivamus sit amet neque vitae sapien bibendum sodales. Curabitur elementum. Duis imperdiet. Donec eleifend porttitor sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis. Sed vehicula pellentesque quam.</p>
+          <p><strong>Functional Requirements (MMFs)</strong></p>
+          <ol>
+            <li><strong>Game Catalog Browsing:</strong>
+              Enable users to access a comprehensive database of video games through the IGDB API.
+              Provide search and filter options based on genre, platform, and other relevant criteria.
+              Display detailed game information, including title, cover art, description, and release date.
+            </li>
+            <li><strong>Game Rating and Reviewing:</strong>
+              Allow users to rate games on a 5-star scale.
+              Enable users to write and submit textual reviews.
+              Display aggregated ratings and user-submitted reviews for each game.
+            </li>
+            <li><strong>Personal Game Lists and Cataloging:</strong>
+              Allow users to organize games into pre-defined lists such as “Played,” “Currently Playing,” and “Want to Play.”
+              Provide functionality for users to create custom lists for specialized game collections.
+              Support sharing lists with others or keeping them private based on user preference.
+            </li>
+            <li><strong>AI-Generated Game Descriptions:</strong>
+              Use the ChatGPT API to generate marketing-free, authentic game descriptions.
+              Provide insights on why users might enjoy a game, focusing on gameplay, story, and overall experience.
+            </li>
+          </ol>
+
+          <p><strong>Non-Functional Requirements</strong></p>
+          <ol>
+            <li><strong>Performance:</strong> Ensure smooth and fast interaction with the IGDB API and minimal latency in loading game information and AI-generated descriptions.</li>
+            <li><strong>Scalability:</strong> Design the platform to handle a growing number of users and expanding game data efficiently.</li>
+            <li><strong>User Experience:</strong> Maintain a clean, intuitive interface that enables effortless navigation and interaction.</li>
+            <li><strong>Security:</strong> Protect user data and ensure the security of login credentials through encrypted authentication mechanisms.</li>
+          </ol>
+
+          <p><strong>Process of Identifying and Prioritizing Requirements</strong></p>
+          <p>
+            The process of identifying and prioritizing requirements for our platform was guided by a user-centric approach,
+            aiming to replicate the core functionality of platforms like Letterboxd while introducing unique features tailored to video game enthusiasts.
+            Our research into Letterboxd's success highlighted the importance of allowing users to catalog their collections, rate and review items,
+            and create personalized lists. We sought to adapt this model for video games, focusing on features like game cataloging and custom lists
+            that reflect gamers' specific needs. However, we also recognized an opportunity to go beyond simple cataloging by leveraging AI-generated descriptions
+            to enhance discovery.
+            The AI-generated descriptions were prioritized because they provide suggestive, marketing-free insights into why a game might be enjoyable,
+            helping users not only catalog games they already know but also discover new titles that align with their interests.
+            By offering genuine information about gameplay, story, and mechanics, this feature bridges the gap between exploration and organization,
+            setting our platform apart from existing solutions.
+          </p>
         </div>
 
         <div class="contentTitle">
