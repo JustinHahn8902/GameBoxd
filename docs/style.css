@@ -13,6 +13,7 @@ body {
     font-size: 13px;
     color: #F1F5F8;
     background: #26476E url(background.png) repeat-x;
+    background-size: 100%;
 }
 *
 {
