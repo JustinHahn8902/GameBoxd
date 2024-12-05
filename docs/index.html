@@ -353,6 +353,114 @@
                 The white box testing cases that we have created deeply test what we have implemented in the backend, ensuring that the internal logic and pathways are functioning as intended.
                 By combining AI-generated test scripts with manual refinements, the testing process ensured a thorough and reliable evaluation of all core functionalities, highlighting the robustness and reliability of the system's internal structure.
             </p>
+            <h1>Comparative Analysis: AI vs Human Test Generation</h1>
+
+            <h2>Performance Metrics</h2>
+            <p>
+                By using AI-assisted test generation we significantly reduced the time required to create test cases compared to human manual efforts.
+                For instance, by our generation of a test case for "Register User (Valid Input)" took only 0.25 minutes with AI, while it took 12 minutes manually.
+                Similar reductions were observed across all test scenarios, with AI-generated times consistently under 1 minute while human-generated times ranged from 8 to 15 minutes.
+                This drastic reduction in time allowed for more iterations and faster development cycles.
+            </p>
+
+            <h2>Usability</h2>
+            <p>
+                When we were using AI tools like GPT-4o and GitHub Copilot provided structured and efficient templates for test cases. These tools streamlined the process,
+                especially for repetitive or straightforward scenarios such as validating user input or error handling.
+                However, when we needed to address nuanced edge cases and ensure comprehensive test coverage, particularly for scenarios involving complex business logic,
+                we needed to jump in and manually refine the test cases. This manual refinement was essential to ensure the accuracy and reliability of the tests.
+            </p>
+
+
+            <h2>Impact on Quality</h2>
+            <p>
+                While AI-generated test cases were consistent and well-structured, they occasionally missed complex edge cases or required additional refinement to ensure correctness.
+                Human-generated tests, specifically depending on whether the developer could address all aspects of the test that they were intending to address, provided more comprehensive coverage and addressed nuanced scenarios effectively. By combining AI-generated test cases with manual refinement, the team achieved a balance of speed and quality.
+            </p>
+
+            <h2>Metrics and Statistical Evidence</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Test Case</th>
+                    <th>AI-Generated Time (minutes)</th>
+                    <th>Human-Generated Time (minutes)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Register User (Valid Input)</td>
+                    <td>0.25</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>Register User (Duplicate Username)</td>
+                    <td>0.4</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>Register User (Missing Username)</td>
+                    <td>0.35</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Register User (Missing Password)</td>
+                    <td>0.3</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>Login (Valid Credentials)</td>
+                    <td>0.25</td>
+                    <td>14</td>
+                </tr>
+                <tr>
+                    <td>Login (Missing Username)</td>
+                    <td>0.3</td>
+                    <td>13</td>
+                </tr>
+                <tr>
+                    <td>Login (Missing Password)</td>
+                    <td>0.4</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>Login (Invalid Password)</td>
+                    <td>0.35</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>Login (Non-Existent User)</td>
+                    <td>0.5</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Search Users (Valid Query)</td>
+                    <td>0.45</td>
+                </tr>
+                <tr>
+                    <td>Search Users (Missing Query Parameter)</td>
+                    <td>0.35</td>
+                </tr>
+                <tr>
+                    <td>Retrieve User by ID (Valid ID)</td>
+                    <td>0.3</td>
+                </tr>
+                <tr>
+                    <td>Retrieve User by ID (Non-Existent ID)</td>
+                    <td>0.4</td>
+                    <td>15</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2>Conclusion</h2>
+            <p>
+                Our comparative analysis demonstrates that AI tools significantly enhance productivity because they significantly reduce generation time.
+                However, the quality of AI-generated tests depends on human refinement to address complex scenarios and ensure comprehensive coverage, this also
+                causes AI to miss a lot of the deeper test cases but humans to also miss test cases that AI may produce.
+                By taking a look at all of the strengths of AI and manual testing provides the optimal balance of speed,
+                usability, and quality for software testing.
+            </p>
 
 
 
