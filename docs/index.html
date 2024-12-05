@@ -131,30 +131,58 @@
           <h1>Design</h1>
       </div>
       <div class="contentText">
+
+        <img src="login.PNG" alt="An example image" width="800">
         <p>
           The design of our application is centered around creating a user-friendly, visually engaging, and community-driven platform that enhances the gaming experience.
           Every design decision reflects our commitment to usability, scalability, and fostering connections amongst gamers. Let’s dive into the details of how the design achieves this.
-          
-          Our system is designed with a React.js frontend, a Node.js/Express-powered backend, and the MongoDB database which is connected through the
-          Mongoose Object Relational Mapper (ORM). Through HTTP requests, the frontend is able to interact with the backend where users are able to browse and rate
-          different games via components such as the GameCard and StarRating features. The underlying business logic is implemented on the backend, which also accesses
-          the database and assembles the frontend components together. Having Mongoose as the ORM layer allows for more straightforward methods in performing database
-          tasks while taking advantage of Javascript objects as the schema. Distinguishing the front, intermediate and backend layers make it easier to comprehend any
-          complexity within the system as each layer can be separately isolated and focused on, thereby minimizing headaches during development.
+          <img src="chart.PNG" alt="An example image" width="700" height="auto">
+          Our system is meticulously designed using a React.js frontend, a Node.js/Express-powered backend, and a MongoDB database connected via the Mongoose Object Relational Mapper (ORM). 
+          This architecture allows seamless communication between the frontend and backend through structured HTTP requests, enabling users to interact effortlessly with the system. Key features 
+          such as the GameCard and StarRating components enhance the user experience by dynamically rendering relevant game information and user-generated ratings.
+
+          The backend, powered by Node.js and Express, serves as the core of business logic and interfaces with multiple external APIs, including the IGDB API for fetching game details and the 
+          OpenAI API for generating AI-enhanced game descriptions. By leveraging Mongoose as the ORM, we simplify database operations, using JavaScript objects as schemas to streamline interactions 
+          with MongoDB. This approach ensures efficient resource management and facilitates scalability while maintaining consistency throughout the application.
+
+          The layered design of the system promotes modularity and clarity. The frontend handles user interactions and dynamically renders content, while the backend orchestrates API calls, 
+          processes data, and communicates with the database. This separation of concerns allows each layer—frontend, backend, and database—to be developed, tested, and scaled independently, 
+          reducing complexity and enhancing maintainability. By isolating responsibilities, we create a robust framework that minimizes development headaches and accelerates iteration cycles, 
+          ensuring a polished and responsive application.
         </p>
-        <h2>Home Page Design</h2>
         
+
+        <h2>Home Page Design</h2>
+        <img src="home.PNG" alt="An example image" width="700" height="auto">
         <p2>
           The home page is the heart of the application, featuring intuitive navigation and dynamic content to immediately engage users. At its core, the search bar with
           auto-suggestion functionality allows users to quickly find games. As users type, real-time suggestions appear, powered by our backend’s efficient API calls. This
           reduces the time users will spend searching and ensures users find the content they’re looking for in a flash.
         </p2>
+        <h2>Game Card and AI-Generated Descriptions</h2>
+        <img src="game_card.PNG" alt="An example image of the Game Card feature" width="auto" height="800">
+        <p>
+          The Game Card is a pivotal feature of the application, seamlessly blending functionality and user engagement. This component dynamically showcases detailed game 
+          information, including user reviews, ratings, release dates, and screenshots. It also incorporates AI-generated descriptions, providing users with rich, 
+          context-aware summaries of games. These descriptions are crafted using data like genres, gameplay mechanics, and screenshots, ensuring users make informed decisions. 
+          The Game Card also enables players to leave reviews, rate games, and add them to personalized lists, fostering interaction and building a sense of community. Its 
+          visually appealing design and interactivity enrich the overall user experience, making it a standout feature of the platform.
+        </p>
+
         
+        <img src="carousel.PNG" alt="An example image" width="700" height="auto">
         <p3>
           In addition to the search bar, the home page boasts multiple showcase carousels displaying popular games, trending genres, and curated recommendations. These carousels
           make the browsing experience seamless and visually appealing. Users can explore games across various categories, encouraging discovery and keeping the interface dynamic.
-          By integrating vibrant colors throughout the app, we create a lively, engaging aesthetic that matches the enthusiasm and energy of the gaming community.
+          Vibrant colors guide the user throughout the app, creating a lively, engaging aesthetic that matches the enthusiasm and energy of the gaming community.
         </p3>
+
+        <h2>Personal Profile Page</h2>
+        <img src="profile.PNG" alt="An example image" width="700" height="auto">
+        <p4>
+          One of the standout features of the application is the personal profile page, which fosters a sense of ownership and individuality. Users can upload an avatar, view their custom 
+          game lists, and see their followers. This page acts as a hub for personalization, allowing users to showcase their favorite games or interests to others.
+        </p4>
       </div>
 
 

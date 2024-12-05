@@ -254,11 +254,11 @@ body {
   }
   
   .carousel-button-left {
-    left: -10px; /* Adjust to fit within the carousel wrapper */
+    left: 0px; /* Adjust to fit within the carousel wrapper */
   }
   
   .carousel-button-right {
-    right: -10px; /* Adjust to fit within the carousel wrapper */
+    right: 0px; /* Adjust to fit within the carousel wrapper */
   }
   
   /* Responsive Adjustments */
