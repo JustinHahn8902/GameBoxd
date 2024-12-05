@@ -140,9 +140,65 @@
             <h1>Design Patterns Implementation</h1>
         </div>
         <div class="contentText">
-          <p>You may use this template on any site, anywhere, for free just<strong> please leave the link back to me in the footer</strong>. This template validates XHTML 1.1, CSS Validates as well; enjoy :) </p>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer mi. Vivamus sit amet neque vitae sapien bibendum sodales. Curabitur elementum. Duis imperdiet. Donec eleifend porttitor sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis. Sed vehicula pellentesque quam.</p>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer mi. Vivamus sit amet neque vitae sapien bibendum sodales. Curabitur elementum. Duis imperdiet. Donec eleifend porttitor sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis. Sed vehicula pellentesque quam.</p>
+          <h2>Singleton Pattern</h2>
+            <p>
+                The singleton design pattern is used in many different segments of the backend for one primary reason: Providing a single instance of an object throughout the codebase that allows for global management of database state.
+                It also provides marginal improvements in resource allocation and performance when compared to the alternative of opening and closing database conenctions in several different areas of the code.
+
+
+            </p>
+            <h3>Code Example 1 (<i>server/server.js:8</i>)</h3>
+            <pre>
+                <code>
+                    // Connect to MongoDB
+                    mongoose.connect(process.env.MONGO_URI, {
+                      useNewUrlParser: true,
+                      useUnifiedTopology: true,
+                    })
+                      .then(() => {
+                        console.log('Connected to MongoDB');
+                        
+                        // Create and start the Express app
+                        const app = createApp();
+                        app.listen(PORT, () => {
+                          console.log(`Server is running on port ${PORT}`);
+                        });
+                      })
+                </code>
+            </pre>
+            <p>The above code snippet shows our backend code making a single connection to our MongoDB database prior to instantiating the app. This connection is then used globally throughout the application via the Mongoose ORM library.</p>
+            
+            <h3>Code Example 2 (<i>server/models/Game.js</i>)</h3>
+            <pre>
+                <code>
+                    const mongoose = require('mongoose');
+
+                    const gameSchema = new mongoose.Schema({
+                        igdb_id: Number,
+                        name: String,
+                        genres: [String],
+                        release_date: Date,
+                        cover_url: String,
+                        screenshot_urls: [String],
+                        similar_games: [Number],
+                        total_rating: Number,
+                        total_rating_count: Number,
+                        summary: String,
+                        website_urls: [String],
+                        platforms: [String]
+                    });
+                    
+                    const Game = mongoose.model('Game', gameSchema);
+                    
+                    module.exports = Game;
+                </code>
+            </pre>
+            
+            <p>Code Example 2 shows the instantiation of a <i>Game</i> model object that it subsequently exported and used as a database access object throughout the codebase, exemplifying the usage of the singleton design pattern.</p>
+            <br>
+            <p>Overall, the usage of the singleton pattern throughout the backend API code made interfacing with the database significantly easier by reducing the effort required to make database transactions.</p>
+          <h2>Factory Pattern</h2>
+          <h2>Decorator Pattern</h2>
         </div>
 
         <div class="contentTitle">
