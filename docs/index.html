@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="style.css" />
@@ -285,10 +285,80 @@
             <h1>Testing Strategy, Execution, AI tool analysis</h1>
         </div>
         <div class="contentText">
-          <p>You may use this template on any site, anywhere, for free just<strong> please leave the link back to me in the footer</strong>. This template validates XHTML 1.1, CSS Validates as well; enjoy :) </p>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer mi. Vivamus sit amet neque vitae sapien bibendum sodales. Curabitur elementum. Duis imperdiet. Donec eleifend porttitor sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis. Sed vehicula pellentesque quam.</p>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer mi. Vivamus sit amet neque vitae sapien bibendum sodales. Curabitur elementum. Duis imperdiet. Donec eleifend porttitor sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis. Sed vehicula pellentesque quam.</p>
+
+            <h2>Test Strategy</h2>
+            <p>
+                We implemented a testing strategy for GameBoxd that incorporated both blackbox and whitebox testing strategies.
+                We employed Blackbox testing to validate external system behaviors this was done by not focusing on user inputs and expected outputs without delving into the internal code structure.
+                Furthermore, with Whitebox testing, we targeted the internal logic and pathways to ensure all individual components and integrations of our applications were functioning as intended.
+            </p>
+
+            <h3>Blackbox Testing</h3>
+            <p>
+                With our Blackbox testing strategy we focused on validating the external functionalities of the system, including user registration, login, and user interaction features like searching for users or retrieving user details by ID.
+                We conducted the testing process with Postman to simulate API requests and validate responses. These tests ensured that the system behaved as expected when interacting with external inputs under various scenarios.
+                We applied our ai-generated tests using GPT-4 to generate and refine test cases for common scenarios and potential edge cases, while also manually creating test cases ensured comprehensive coverage of more nuanced conditions.
+
+                For the registration functionality, we executed several test cases to ensure robust validation and error handling. The POST request to <code>/api/auth/register</code> with valid data successfully registered a new user, returning the 201 status code the message "User registered successfully."
+                Another test case we created confirmed that attempting to register with an existing username resulted in a 400 status code and the error message "Username already exists."
+                The other test cases validated the handling of incomplete input; for example, a registration request missing a username or password correctly returned a 400 status code with the message "Username and password are required."
+
+                We tested Login functionality similarly with various scenarios.
+                With our tests successful login with valid credentials returned a 200 status code and the message "Login successful."
+                However, for our tests on login attempts with incomplete input, such as a missing username or password, result n a 400 status code with the error message "Username and password are required."
+                Tests also covered invalid credentials: a non-existent username returned a 404 status code and the message "User not found," while an incorrect password produced a 401 status code and the message "Invalid password."
+
+                Our search functionality, accessed via <code>/api/auth/search</code>, was tested for accuracy and proper error handling. A GET request with a valid query returned a list of matching users and a 200 status code, verifying the system's ability to filter user data effectively.
+                Conversely, a missing query parameter appropriately returned a 400 status code and the message "Username is required."
+
+                We also implemented tests for retrieving user details by ID validated the system’s ability to fetch data accurately.
+                A GET request to <code>/api/auth/:id</code> with a valid user ID returned the expected user information and a 200 status code.
+                In contrast, we created a test for invalid or non-existent user ID resulted in a 404 status code with the message "User not found."
+                These test cases collectively ensured the reliability and robustness of the system's core functionalities by simulating real-world user interactions and validating appropriate system responses across various scenarios.
+            </p>
+
+            <h3>Whitebox Testing</h3>
+            <p>
+                Our white box testing pushed us towards the internal code and logic of the application, ensuring that each function and component behaved as intended.
+                The testing process employed Jest for unit and integration testing, which validated individual API endpoints and the interaction between the backend and the MongoDB database.
+                We used Github Copilot and GPT-4 to generate initial test scripts, providing a quick and structured foundation for test cases.
+                However, manual refinement was necessary to enhance test coverage and address nuances not captured by the AI-generated cases.
+                This method ensured that the internal workings of the application were robust and reliable.Whitebox testing focused on ensuring the correct execution of internal logic.
+                For instance, a happy path test for the <code>/api/auth/register</code> endpoint verified that a user could be successfully registered and stored in the database when provided with valid inputs.
+                The expected and actual results aligned, confirming the test as a pass. Another test case examined the behavior of the login endpoint when an incorrect password was submitted.
+                The system returned a 401 status code and the message "Invalid password," meeting the expected result and passing the test.
+                These tests highlighted the reliability of the internal logic under both expected and erroneous conditions.
+            </p>
+
+
+            <h2>AI Tools in Testing</h2>
+            <p>
+                Our white box testing focused on the internal code and logic of the application, ensuring that each function and component behaved as intended.
+                This testing approach employed Jest for unit and integration testing, validating the functionality of API endpoints and their interactions with the MongoDB database.
+                To streamline the initial development of test scripts, we used GitHub Copilot and GPT-4, which provided structured and efficient foundations for test cases.
+                However, manual refinement was necessary to ensure comprehensive coverage and through these manual changes we addressed nuances not captured by the AI.
+                We focused on White box testing by examining the <code>/api/auth/register</code> endpoint to validate the registration functionality.
+                We also focused on the user story such that the "happy path" test confirmed that a new user could be registered and stored in the database when provided with valid inputs, returning a 201 status code and the message "User registered successfully."
+                We handled edge cases, by creating a test for duplicate usernames ensured that attempted to register an already existing username returned a 400 status code and the error message "Username already exists."
+                Additional tests verified that incomplete input, such as missing a username or password, appropriately returned a 400 status code with the error message "Username and password are required," ensuring consistent validation across different input scenarios.
+                The <code>/api/auth/login</code> endpoint underwent rigorous testing to validate its functionality.
+                We set up our successful login with valid credentials returned a 200 status code and the message "Login successful," which allowed us to confirm working login functionality.
+                The edge cases we included incomplete handle the input scenarios where a missing username or password correctly returned a 400 status code with the message "Username and password are required."
+                Our tests also validated error handling for invalid credentials: a non-existent username returned a 404 status code with the message "User not found," while an incorrect password resulted in a 401 status code and the message "Invalid password."
+                These tests ensured robust validation and error handling for the login feature.
+                The user search functionality, we implemented via the <code>/api/auth/search</code> endpoint, was tested for its ability to handle both valid and invalid queries.
+                We increase valid search query returned a 200 status code and a list of matching users, confirming the functionality of the search feature. On the other hand, a missing query parameter resulted in a 400 status code with the error message "Username is required," validating the endpoint's ability to handle invalid input gracefully.
+                We also tested for retrieving user details by ID through the <code>/api/auth/:id</code> endpoint verified the system’s ability to accurately fetch user data.
+                A GET request with a valid user ID successfully returned the user’s details with a 200 status code, ensuring proper functionality. There is also the output that an output invalid or non-existent user ID correctly returned a 404 status code with the message "User not found," demonstrating reliable error handling for invalid inputs.
+                The white box testing cases that we have created deeply test what we have implemented in the backend, ensuring that the internal logic and pathways are functioning as intended.
+                By combining AI-generated test scripts with manual refinements, the testing process ensured a thorough and reliable evaluation of all core functionalities, highlighting the robustness and reliability of the system's internal structure.
+            </p>
+
+
+
+
         </div>
+
 
         <div class="contentTitle">
             <h1>Challenges and Innovations</h1>
