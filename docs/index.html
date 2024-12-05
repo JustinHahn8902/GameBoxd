@@ -197,8 +197,88 @@
             <p>Code Example 2 shows the instantiation of a <i>Game</i> model object that it subsequently exported and used as a database access object throughout the codebase, exemplifying the usage of the singleton design pattern.</p>
             <br>
             <p>Overall, the usage of the singleton pattern throughout the backend API code made interfacing with the database significantly easier by reducing the effort required to make database transactions.</p>
+            <br>
           <h2>Factory Pattern</h2>
+          <p>
+              The factory pattern was also used in the process of simplifying database access in the backend code. By defining our data models using Mongoose schemas, we were able to completely abstract the logic required for interfacing with a variety of MongoDB collections.
+              As seen in code example 2, using the factory pattern to instantiate models out of schema objects allowed us to centralize the creation logic for models making adjustments and additions to small fields in the MongoDB collections very simple. This pattern in tandem
+              with the singleton pattern made the construction of the database structure as well as the interaction throughout execution very simple.
+              <br>
+              Additionally, the factory pattern was used in our script for loading game data from the external IGDB API into our Mongo collection. Below, code example 3 shows the implementation of a <i>fetchAndSaveIGDBData</i> function that acquires data from the API, and then based
+              on the contents of the fetched data, creates game objects with a variety of attributes. Thus, this function is used to create objects without directly specifying the exact class or implementation details of the object being created.
+          </p>
+          <br>
+          <h3>Code example 3 (<i>server/scripts/loadFullIGDBData.js</i>)</h3>
+          <pre>
+              <code>
+                  async function fetchAndSaveIGDBData() {
+                    try {
+                        const token = await getOAuthToken();
+                        const games = await fetchGames(token, 500, 1000); // Adjust limit and offset as needed
+                        console.log(`Fetched ${games.length} games`);
+                
+                        for (const game of games) {
+                            console.log(`Processing Game: ${game.name}`);
+                
+                            const realGame = {
+                                igdb_id: game.id,
+                                name: game.name,
+                                release_date: game.first_release_date ? new Date(game.first_release_date * 1000) : null,
+                                genres: game.genres.map((genre) => genre.name),
+                                cover_url: game.cover ? game.cover.url : null,
+                                screenshot_urls: game.screenshots.map((screenshot) => screenshot.url),
+                                similar_games: game.similar_games,
+                                total_rating: game.total_rating,
+                                total_rating_count: game.total_rating_count,
+                                summary: game.summary,
+                                website_urls: game.websites.map((website) => website.url),
+                                platforms: game.platforms.map((platform) => platform.name),
+                            };
+                
+                            await Game.create(realGame);
+                        }
+                    }
+                }
+              </code>
+          </pre>
           <h2>Decorator Pattern</h2>
+          <p>Finally, the decorator pattern was also used to aid the database interaction process, specifically when a new user registers. By using Mongoose schemas <i>pre</i> function, 
+            we were able to add additional functionality and middleware during the database object creation process. This decorator pattern was applied for two primary reasons:<br>
+          </p>
+          <h3>1) Password Hashing <i>server/models/user.js:38</i></h3>
+          <pre>
+              <code>
+                  userSchema.pre('save', async function (next) {
+                      if (!this.isModified('password')) return next();
+                      this.password = await bcrypt.hash(this.password, 10);
+                      next();
+                  });
+              </code>
+          </pre>
+          <p>In order to securely store our users' data, it is imperative that passwords are adequetly encrypted via hashing prior to their insertion into the database. As such, we used a decorator function on our userSchema
+            to call the BCrypt library's hash function on the password.
+          </p>
+          <h3>2) Creation of default attributes for users <i>server/models/user.js:44</i></h3>
+          <pre>
+              <code>
+                  userSchema.pre('save', async function (next) {
+                    if (this.isNew) {
+                        const defaultLists = ['Played', 'Currently Playing', 'Want to Play'];
+                        const lists = await Promise.all(defaultLists.map(async (name) => {
+                            const list = new List({ name, user: this._id });
+                            await list.save();
+                            return list._id;
+                        }));
+                        this.lists = lists;
+                    }
+                    next();
+                })
+              </code>
+          </pre>
+          <p>
+              We also used the same function on the userSchema in order to create 3 default "list" objects for users- "Played", "Currently Playing", and "Want to Play". Using the decorator pattern here made it very simple to modify and append data to objects
+              prior to their insertion into the database.
+          </p>
         </div>
 
         <div class="contentTitle">
