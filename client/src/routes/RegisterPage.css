@@ -1,0 +1,93 @@
+/* Register Page Styling */
+.register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #1e1e1e; /* Dark background */
+    color: #ffffff; /* White text color */
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+}
+
+.register h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fd00a9; /* Highlighted color */
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 1px 1px 4px rgba(255, 0, 150, 0.7);
+}
+
+.register-box {
+    background: #2a2a2a; /* Slightly lighter background for the box */
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.register-box div {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-box input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    outline: none;
+    background-color: #1e1e1e;
+    color: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.register-box input:focus {
+    border-color: #fd00a9;
+    box-shadow: 0 0 5px rgba(255, 0, 150, 0.5);
+}
+
+.register-box button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #fd00a9;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+.register-box button:hover {
+    background-color: #e00094;
+    transform: scale(1.05);
+}
+
+.register-box button:active {
+    transform: scale(0.95);
+}
+
+.login-invalid {
+    color: #ff4d4d; /* Error message color */
+    font-size: 0.9rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .register-box {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .register h1 {
+        font-size: 2rem;
+    }
+}

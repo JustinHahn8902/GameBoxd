@@ -8,6 +8,7 @@ import { UserContext } from '../context/UserContext';
 const FolProfileBox = ({ username }) => {
     const { user } = useContext(UserContext);
     const [folUser, setFolUser] = useState(null);
+    const [folUserFollowers, setFolUserFollowers] = useState([]);
     const navigate = useNavigate();
     const [followText, setFollowText] = useState('Follow');
 
@@ -16,6 +17,7 @@ const FolProfileBox = ({ username }) => {
             let res = await axios.post('http://localhost:5001/api/users/folUser', {username: username});
             if (res.status == 200) {
                 setFolUser(res.data.user);
+                setFolUserFollowers(res.data.user.followers);
             } else {
                 console.log("Error occured");
             }
@@ -49,27 +51,40 @@ const FolProfileBox = ({ username }) => {
         navigate('/fol-user', { state: { user: person }});
     }
 
-    const handleFollowClick = () => {
+    const handleFollowClick = async () => {
         console.log("Handling follow");
 
         if (followText == "Follow") {
             user?.following.push(username);
+
+            const newArr = [...folUserFollowers, user?.username];
+            setFolUserFollowers(newArr);
+            folUser.followers = newArr;
+
+            await axios.post('http://localhost:5001/api/auth/update', { username: user?.username, followers: user?.followers, following: user?.following });
+            await axios.post('http://localhost:5001/api/auth/update', { username: folUser.username, followers: newArr, following: folUser.following });
+
             setFollowText("Unfollow");
         } else {
             const idx = user?.following.indexOf(username);
             if (idx > -1) {
                 user?.following.splice(idx, 1);
             }
+            
+            const newArr = folUserFollowers.filter(name => name !== user?.username);
+            setFolUserFollowers(newArr);
+            folUser.followers = newArr;
+
+            await axios.post('http://localhost:5001/api/auth/update', { username: user?.username, followers: user?.followers, following: user?.following });
+            await axios.post('http://localhost:5001/api/auth/update', { username: folUser.username, followers: newArr, following: folUser.following });
+
             setFollowText("Follow");
         }
-
-        console.log(user);
-        // TODO: endpoint for actually adding follower to db
     };
 
     return (
         <div className='profile-wrapper'>
-            <PeopleList title='Followers:' items={folUser?.followers || []} handleClick={clickOnPerson} />
+            <PeopleList title='Followers:' items={folUserFollowers || []} handleClick={clickOnPerson} />
             <div className='profile-attribute-box'>
 
                 <p className='profile-title'>Profile</p>

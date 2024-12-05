@@ -1,4 +1,4 @@
-import '../styles.css';
+import './RegisterPage.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { UserContext } from '../context/UserContext';

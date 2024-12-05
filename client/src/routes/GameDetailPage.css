@@ -1,21 +1,21 @@
 /* General Styling for Game Detail Page */
 .game-detail {
     position: relative;
-    background: #1e1e1e;
+    background: #c4c1c1;
     color: white;
     padding: 20px;
     border-radius: 10px;
     margin: 20px auto;
     max-width: 900px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgb(255, 255, 255);
     font-family: Arial, sans-serif;
 }
 
 /* Close Button Styling */
 .close-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     background: transparent;
     border: none;
     font-size: 2rem;
@@ -23,7 +23,32 @@
     color: white;
     cursor: pointer;
     transition: color 0.3s;
+    z-index: 100;
 }
+
+.game-detail-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(226, 223, 223, 0.699);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.game-detail {
+    background-color: #504c4f;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 900px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
 
 .close-button:hover {
     color: #ff0000;
@@ -34,7 +59,7 @@
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #4caf50;
+    color: #fd00a9;
     text-align: center;
 }
 
@@ -147,7 +172,7 @@
 .review-submit-button {
     margin-top: 10px;
     padding: 10px 20px;
-    background: #4CAF50;
+    background: #fd00a9;
     color: white;
     border: none;
     border-radius: 5px;
@@ -156,7 +181,7 @@
 }
 
 .review-submit-button:hover {
-    background: #45a049;
+    background: #fd00a9;
 }
 
 /* Reviews Section */
@@ -243,4 +268,82 @@
     max-height: 90%;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.rating-and-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px; /* Adjust spacing as needed */
+}
+
+.rating-and-list .add-to-list {
+    margin-left: 20px; /* Add spacing between the two sections */
+    text-align: right; /* Align dropdown content to the right */
+}
+
+.rating-and-list .add-to-list select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: auto; /* Adjust width as needed */
+}
+
+.add-to-list {
+    margin-top: 20px;
+}
+
+.add-to-list select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: rgba(92, 92, 92, 0.151);
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    color: rgb(255, 255, 255);
+}
+
+.add-to-list select option {
+    background-color: #7a7a7a;
+}
+
+.add-to-list h2 {
+    margin-bottom: 10px;
+}
+
+.add-to-list-button {
+    size: 20px;
+    margin-left: 10px;
+    padding: 9px;
+    padding-left: 22px;
+    padding-right: 22px;
+    background: #fd00a9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.remove-from-list-button {
+    size: 20px;
+    margin-left: 10px;
+    padding: 9px;
+    background: #b93030;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.game-detail-container {
+    position: relative;
+    background: rgba(0, 0, 0, 0.8); /* Dimmed background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
 }

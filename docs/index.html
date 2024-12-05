@@ -1,0 +1,551 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>GameBoxd Report</title>
+</head>
+
+<body>
+    <div id="page">
+
+        <div id="header">
+        	<h1>GameBoxd Report</h1>
+            <h2>CS 3300: Group 12</h2>
+        </div>
+
+        <div class="contentTitle">
+            <h1>Introduction/Background</h1>
+        </div>
+        <div class="contentText">
+          <p>
+            Our aim for Project 2 was to build a social cataloging platform, similar to Letterboxd, for video game enthusiasts, providing features such as game cataloging, 
+            reviews, ratings, and creating/viewing lists. Furthermore, we also included the additive feature of AI-generated game descriptions, seeking to provide a
+            more genuine and honest take on what each game offers.
+            This platform seeks to bridge the gap between gamers and their desire to share experiences, discover new games, 
+            and engage with a community that values thoughtful discussions and curation. By offering tools for users to write reviews, rate titles, 
+            and craft personalized lists, the platform aspires to become a go-to destination for gaming enthusiasts to connect and explore.
+          </p>
+          <p>
+            To achieve this, we employed a technology stack tailored for scalability, usability, and performance.
+            The backend is powered by Node.js and Express, providing a robust and flexible API layer to handle user interactions and data storage. 
+            For the database, we chose MongoDB, which allows for efficient handling of the semi-structured data typical in game metadata, user reviews, and ratings. 
+            The frontend is built using React.js, delivering a responsive and interactive user experience.
+          </p>
+          <p>
+            This project is significant because it addresses the lack of a centralized platform where gamers can both curate their personal game collections 
+            and interact socially around shared interests. Existing platforms like Metacritic and IGN offer reviews and ratings but lack the personalized 
+            cataloging and community-driven features central to our project. Our approach combines the best elements of social media and cataloging platforms, 
+            providing a unique space for gamers to engage.
+          </p>
+          <p>
+            The scope of the project includes the development of core features like user registration/login, game search and cataloging, review and rating submission, 
+            and the ability to create and share lists. We also plan to implement social features such as following other users and interacting with their reviews and lists.
+            Our project management approach follows an Agile methodology, emphasizing iterative development, frequent user feedback, and adaptability to changing requirements.
+          </p>
+        </div>
+
+        <div class="contentTitle">
+            <h1>Software Technologies</h1>
+        </div>
+        <div class="contentText">
+          <p><strong>Technologies and Frameworks</strong></p>
+          <ol>
+            <li><strong>IGDB API:</strong> The IGDB (Internet Game Database) API was integral to our platform,
+              serving as the primary source for game metadata. It provides a comprehensive database of video game information,
+              including titles, genres, platforms, and cover art.
+              The IGDB API was chosen for its reliability, extensive dataset, and ease of integration, enabling users to quickly find accurate and detailed information
+              about their favorite games or discover new ones to explore.
+            </li>
+            <li><strong>Jest:</strong> For testing, we utilized Jest, a widely used JavaScript testing framework.
+              Jest was chosen for its simplicity, fast performance, and powerful mocking capabilities.
+              It allowed us to implement unit tests efficiently, ensuring the reliability of our platform’s core functionalities,
+              from API interactions to user-generated content features like reviews and lists.
+            </li>
+          </ol>
+          <p><strong>AI Tools</strong></p>
+          <ol>
+            <li><strong>Github Copilot:</strong> Played a crucial role in streamlining development.
+              It provided context-aware code suggestions and assisted with boilerplate generation, enabling us to work more efficiently and focus on complex problem-solving. 
+              Copilot was particularly helpful when integrating the IGDB API and implementing user-facing features, reducing development time while improving code quality.
+            </li>
+            <li><strong>ChatGPT API:</strong> The ChatGPT API was used to generate AI-driven game descriptions.
+              This tool added significant value to the platform by offering personalized, marketing-free summaries that highlight the core reasons
+              why a player might enjoy a particular game.
+              The ChatGPT API was selected for its state-of-the-art language processing capabilities and its ability to deliver high-quality,
+              natural language outputs tailored to our audience’s preferences.
+            </li>
+          </ol>
+        </div>
+
+        <div class="contentTitle">
+            <h1>Requirements</h1>
+        </div>
+        <div class="contentText">
+          <p><strong>Functional Requirements (MMFs)</strong></p>
+          <ol>
+            <li><strong>Game Catalog Browsing:</strong>
+              Enable users to access a comprehensive database of video games through the IGDB API.
+              Provide search and filter options based on genre, platform, and other relevant criteria.
+              Display detailed game information, including title, cover art, description, and release date.
+            </li>
+            <li><strong>Game Rating and Reviewing:</strong>
+              Allow users to rate games on a 5-star scale.
+              Enable users to write and submit textual reviews.
+              Display aggregated ratings and user-submitted reviews for each game.
+            </li>
+            <li><strong>Personal Game Lists and Cataloging:</strong>
+              Allow users to organize games into pre-defined lists such as “Played,” “Currently Playing,” and “Want to Play.”
+              Provide functionality for users to create custom lists for specialized game collections.
+              Support sharing lists with others or keeping them private based on user preference.
+            </li>
+            <li><strong>AI-Generated Game Descriptions:</strong>
+              Use the ChatGPT API to generate marketing-free, authentic game descriptions.
+              Provide insights on why users might enjoy a game, focusing on gameplay, story, and overall experience.
+            </li>
+          </ol>
+
+          <p><strong>Non-Functional Requirements</strong></p>
+          <ol>
+            <li><strong>Performance:</strong> Ensure smooth and fast interaction with the IGDB API and minimal latency in loading game information and AI-generated descriptions.</li>
+            <li><strong>Scalability:</strong> Design the platform to handle a growing number of users and expanding game data efficiently.</li>
+            <li><strong>User Experience:</strong> Maintain a clean, intuitive interface that enables effortless navigation and interaction.</li>
+            <li><strong>Security:</strong> Protect user data and ensure the security of login credentials through encrypted authentication mechanisms.</li>
+          </ol>
+
+          <p><strong>Process of Identifying and Prioritizing Requirements</strong></p>
+          <p>
+            The process of identifying and prioritizing requirements for our platform was guided by a user-centric approach,
+            aiming to replicate the core functionality of platforms like Letterboxd while introducing unique features tailored to video game enthusiasts.
+            Our research into Letterboxd's success highlighted the importance of allowing users to catalog their collections, rate and review items,
+            and create personalized lists. We sought to adapt this model for video games, focusing on features like game cataloging and custom lists
+            that reflect gamers' specific needs. However, we also recognized an opportunity to go beyond simple cataloging by leveraging AI-generated descriptions
+            to enhance discovery.
+            The AI-generated descriptions were prioritized because they provide suggestive, marketing-free insights into why a game might be enjoyable,
+            helping users not only catalog games they already know but also discover new titles that align with their interests.
+            By offering genuine information about gameplay, story, and mechanics, this feature bridges the gap between exploration and organization,
+            setting our platform apart from existing solutions.
+          </p>
+        </div>
+
+        <div class="contentTitle">
+          <h1>Design</h1>
+      </div>
+      <div class="contentText">
+        <p>
+          The design of our application is centered around creating a user-friendly, visually engaging, and community-driven platform that enhances the gaming experience.
+          Every design decision reflects our commitment to usability, scalability, and fostering connections amongst gamers. Let’s dive into the details of how the design achieves this.
+          
+          Our system is designed with a React.js frontend, a Node.js/Express-powered backend, and the MongoDB database which is connected through the
+          Mongoose Object Relational Mapper (ORM). Through HTTP requests, the frontend is able to interact with the backend where users are able to browse and rate
+          different games via components such as the GameCard and StarRating features. The underlying business logic is implemented on the backend, which also accesses
+          the database and assembles the frontend components together. Having Mongoose as the ORM layer allows for more straightforward methods in performing database
+          tasks while taking advantage of Javascript objects as the schema. Distinguishing the front, intermediate and backend layers make it easier to comprehend any
+          complexity within the system as each layer can be separately isolated and focused on, thereby minimizing headaches during development.
+        </p>
+        <h2>Home Page Design</h2>
+        
+        <p2>
+          The home page is the heart of the application, featuring intuitive navigation and dynamic content to immediately engage users. At its core, the search bar with
+          auto-suggestion functionality allows users to quickly find games. As users type, real-time suggestions appear, powered by our backend’s efficient API calls. This
+          reduces the time users will spend searching and ensures users find the content they’re looking for in a flash.
+        </p2>
+        
+        <p3>
+          In addition to the search bar, the home page boasts multiple showcase carousels displaying popular games, trending genres, and curated recommendations. These carousels
+          make the browsing experience seamless and visually appealing. Users can explore games across various categories, encouraging discovery and keeping the interface dynamic.
+          By integrating vibrant colors throughout the app, we create a lively, engaging aesthetic that matches the enthusiasm and energy of the gaming community.
+        </p3>
+      </div>
+
+
+        <div class="contentTitle">
+            <h1>Design Patterns Implementation</h1>
+        </div>
+        <div class="contentText">
+          <h2>Singleton Pattern</h2>
+            <p>
+                The singleton design pattern is used in many different segments of the backend for one primary reason: Providing a single instance of an object throughout the codebase that allows for global management of database state.
+                It also provides marginal improvements in resource allocation and performance when compared to the alternative of opening and closing database conenctions in several different areas of the code.
+
+
+            </p>
+            <h3>Code Example 1 (<i>server/server.js:8</i>)</h3>
+            <pre>
+                <code>
+                    // Connect to MongoDB
+                    mongoose.connect(process.env.MONGO_URI, {
+                      useNewUrlParser: true,
+                      useUnifiedTopology: true,
+                    })
+                      .then(() => {
+                        console.log('Connected to MongoDB');
+                        
+                        // Create and start the Express app
+                        const app = createApp();
+                        app.listen(PORT, () => {
+                          console.log(`Server is running on port ${PORT}`);
+                        });
+                      })
+                </code>
+            </pre>
+            <p>The above code snippet shows our backend code making a single connection to our MongoDB database prior to instantiating the app. This connection is then used globally throughout the application via the Mongoose ORM library.</p>
+            
+            <h3>Code Example 2 (<i>server/models/Game.js</i>)</h3>
+            <pre>
+                <code>
+                    const mongoose = require('mongoose');
+
+                    const gameSchema = new mongoose.Schema({
+                        igdb_id: Number,
+                        name: String,
+                        genres: [String],
+                        release_date: Date,
+                        cover_url: String,
+                        screenshot_urls: [String],
+                        similar_games: [Number],
+                        total_rating: Number,
+                        total_rating_count: Number,
+                        summary: String,
+                        website_urls: [String],
+                        platforms: [String]
+                    });
+                    
+                    const Game = mongoose.model('Game', gameSchema);
+                    
+                    module.exports = Game;
+                </code>
+            </pre>
+            
+            <p>Code Example 2 shows the instantiation of a <i>Game</i> model object that it subsequently exported and used as a database access object throughout the codebase, exemplifying the usage of the singleton design pattern.</p>
+            <br>
+            <p>Overall, the usage of the singleton pattern throughout the backend API code made interfacing with the database significantly easier by reducing the effort required to make database transactions.</p>
+            <br>
+          <h2>Factory Pattern</h2>
+          <p>
+              The factory pattern was also used in the process of simplifying database access in the backend code. By defining our data models using Mongoose schemas, we were able to completely abstract the logic required for interfacing with a variety of MongoDB collections.
+              As seen in code example 2, using the factory pattern to instantiate models out of schema objects allowed us to centralize the creation logic for models making adjustments and additions to small fields in the MongoDB collections very simple. This pattern in tandem
+              with the singleton pattern made the construction of the database structure as well as the interaction throughout execution very simple.
+              <br>
+              Additionally, the factory pattern was used in our script for loading game data from the external IGDB API into our Mongo collection. Below, code example 3 shows the implementation of a <i>fetchAndSaveIGDBData</i> function that acquires data from the API, and then based
+              on the contents of the fetched data, creates game objects with a variety of attributes. Thus, this function is used to create objects without directly specifying the exact class or implementation details of the object being created.
+          </p>
+          <br>
+          <h3>Code example 3 (<i>server/scripts/loadFullIGDBData.js</i>)</h3>
+          <pre>
+              <code>
+                  async function fetchAndSaveIGDBData() {
+                    try {
+                        const token = await getOAuthToken();
+                        const games = await fetchGames(token, 500, 1000); // Adjust limit and offset as needed
+                        console.log(`Fetched ${games.length} games`);
+                
+                        for (const game of games) {
+                            console.log(`Processing Game: ${game.name}`);
+                
+                            const realGame = {
+                                igdb_id: game.id,
+                                name: game.name,
+                                release_date: game.first_release_date ? new Date(game.first_release_date * 1000) : null,
+                                genres: game.genres.map((genre) => genre.name),
+                                cover_url: game.cover ? game.cover.url : null,
+                                screenshot_urls: game.screenshots.map((screenshot) => screenshot.url),
+                                similar_games: game.similar_games,
+                                total_rating: game.total_rating,
+                                total_rating_count: game.total_rating_count,
+                                summary: game.summary,
+                                website_urls: game.websites.map((website) => website.url),
+                                platforms: game.platforms.map((platform) => platform.name),
+                            };
+                
+                            await Game.create(realGame);
+                        }
+                    }
+                }
+              </code>
+          </pre>
+          <h2>Decorator Pattern</h2>
+          <p>Finally, the decorator pattern was also used to aid the database interaction process, specifically when a new user registers. By using Mongoose schemas <i>pre</i> function, 
+            we were able to add additional functionality and middleware during the database object creation process. This decorator pattern was applied for two primary reasons:<br>
+          </p>
+          <h3>1) Password Hashing <i>server/models/user.js:38</i></h3>
+          <pre>
+              <code>
+                  userSchema.pre('save', async function (next) {
+                      if (!this.isModified('password')) return next();
+                      this.password = await bcrypt.hash(this.password, 10);
+                      next();
+                  });
+              </code>
+          </pre>
+          <p>In order to securely store our users' data, it is imperative that passwords are adequetly encrypted via hashing prior to their insertion into the database. As such, we used a decorator function on our userSchema
+            to call the BCrypt library's hash function on the password.
+          </p>
+          <h3>2) Creation of default attributes for users <i>server/models/user.js:44</i></h3>
+          <pre>
+              <code>
+                  userSchema.pre('save', async function (next) {
+                    if (this.isNew) {
+                        const defaultLists = ['Played', 'Currently Playing', 'Want to Play'];
+                        const lists = await Promise.all(defaultLists.map(async (name) => {
+                            const list = new List({ name, user: this._id });
+                            await list.save();
+                            return list._id;
+                        }));
+                        this.lists = lists;
+                    }
+                    next();
+                })
+              </code>
+          </pre>
+          <p>
+              We also used the same function on the userSchema in order to create 3 default "list" objects for users- "Played", "Currently Playing", and "Want to Play". Using the decorator pattern here made it very simple to modify and append data to objects
+              prior to their insertion into the database.
+          </p>
+        </div>
+
+        <div class="contentTitle">
+            <h1>Testing Strategy, Execution, AI tool analysis</h1>
+        </div>
+        <div class="contentText">
+
+            <h2>Test Strategy</h2>
+            <p>
+                We implemented a testing strategy for GameBoxd that incorporated both blackbox and whitebox testing strategies.
+                We employed Blackbox testing to validate external system behaviors this was done by not focusing on user inputs and expected outputs without delving into the internal code structure.
+                Furthermore, with Whitebox testing, we targeted the internal logic and pathways to ensure all individual components and integrations of our applications were functioning as intended.
+            </p>
+
+            <h3>Blackbox Testing</h3>
+            <p>
+                With our Blackbox testing strategy we focused on validating the external functionalities of the system, including user registration, login, and user interaction features like searching for users or retrieving user details by ID.
+                We conducted the testing process with Postman to simulate API requests and validate responses. These tests ensured that the system behaved as expected when interacting with external inputs under various scenarios.
+                We applied our ai-generated tests using GPT-4 to generate and refine test cases for common scenarios and potential edge cases, while also manually creating test cases ensured comprehensive coverage of more nuanced conditions.
+
+                For the registration functionality, we executed several test cases to ensure robust validation and error handling. The POST request to <code>/api/auth/register</code> with valid data successfully registered a new user, returning the 201 status code the message "User registered successfully."
+                Another test case we created confirmed that attempting to register with an existing username resulted in a 400 status code and the error message "Username already exists."
+                The other test cases validated the handling of incomplete input; for example, a registration request missing a username or password correctly returned a 400 status code with the message "Username and password are required."
+
+                We tested Login functionality similarly with various scenarios.
+                With our tests successful login with valid credentials returned a 200 status code and the message "Login successful."
+                However, for our tests on login attempts with incomplete input, such as a missing username or password, result n a 400 status code with the error message "Username and password are required."
+                Tests also covered invalid credentials: a non-existent username returned a 404 status code and the message "User not found," while an incorrect password produced a 401 status code and the message "Invalid password."
+
+                Our search functionality, accessed via <code>/api/auth/search</code>, was tested for accuracy and proper error handling. A GET request with a valid query returned a list of matching users and a 200 status code, verifying the system's ability to filter user data effectively.
+                Conversely, a missing query parameter appropriately returned a 400 status code and the message "Username is required."
+
+                We also implemented tests for retrieving user details by ID validated the system’s ability to fetch data accurately.
+                A GET request to <code>/api/auth/:id</code> with a valid user ID returned the expected user information and a 200 status code.
+                In contrast, we created a test for invalid or non-existent user ID resulted in a 404 status code with the message "User not found."
+                These test cases collectively ensured the reliability and robustness of the system's core functionalities by simulating real-world user interactions and validating appropriate system responses across various scenarios.
+            </p>
+
+            <h3>Whitebox Testing</h3>
+            <p>
+                Our white box testing pushed us towards the internal code and logic of the application, ensuring that each function and component behaved as intended.
+                The testing process employed Jest for unit and integration testing, which validated individual API endpoints and the interaction between the backend and the MongoDB database.
+                We used Github Copilot and GPT-4 to generate initial test scripts, providing a quick and structured foundation for test cases.
+                However, manual refinement was necessary to enhance test coverage and address nuances not captured by the AI-generated cases.
+                This method ensured that the internal workings of the application were robust and reliable.Whitebox testing focused on ensuring the correct execution of internal logic.
+                For instance, a happy path test for the <code>/api/auth/register</code> endpoint verified that a user could be successfully registered and stored in the database when provided with valid inputs.
+                The expected and actual results aligned, confirming the test as a pass. Another test case examined the behavior of the login endpoint when an incorrect password was submitted.
+                The system returned a 401 status code and the message "Invalid password," meeting the expected result and passing the test.
+                These tests highlighted the reliability of the internal logic under both expected and erroneous conditions.
+            </p>
+
+
+            <h2>AI Tools in Testing</h2>
+            <p>
+                Our white box testing focused on the internal code and logic of the application, ensuring that each function and component behaved as intended.
+                This testing approach employed Jest for unit and integration testing, validating the functionality of API endpoints and their interactions with the MongoDB database.
+                To streamline the initial development of test scripts, we used GitHub Copilot and GPT-4, which provided structured and efficient foundations for test cases.
+                However, manual refinement was necessary to ensure comprehensive coverage and through these manual changes we addressed nuances not captured by the AI.
+                We focused on White box testing by examining the <code>/api/auth/register</code> endpoint to validate the registration functionality.
+                We also focused on the user story such that the "happy path" test confirmed that a new user could be registered and stored in the database when provided with valid inputs, returning a 201 status code and the message "User registered successfully."
+                We handled edge cases, by creating a test for duplicate usernames ensured that attempted to register an already existing username returned a 400 status code and the error message "Username already exists."
+                Additional tests verified that incomplete input, such as missing a username or password, appropriately returned a 400 status code with the error message "Username and password are required," ensuring consistent validation across different input scenarios.
+                The <code>/api/auth/login</code> endpoint underwent rigorous testing to validate its functionality.
+                We set up our successful login with valid credentials returned a 200 status code and the message "Login successful," which allowed us to confirm working login functionality.
+                The edge cases we included incomplete handle the input scenarios where a missing username or password correctly returned a 400 status code with the message "Username and password are required."
+                Our tests also validated error handling for invalid credentials: a non-existent username returned a 404 status code with the message "User not found," while an incorrect password resulted in a 401 status code and the message "Invalid password."
+                These tests ensured robust validation and error handling for the login feature.
+                The user search functionality, we implemented via the <code>/api/auth/search</code> endpoint, was tested for its ability to handle both valid and invalid queries.
+                We increase valid search query returned a 200 status code and a list of matching users, confirming the functionality of the search feature. On the other hand, a missing query parameter resulted in a 400 status code with the error message "Username is required," validating the endpoint's ability to handle invalid input gracefully.
+                We also tested for retrieving user details by ID through the <code>/api/auth/:id</code> endpoint verified the system’s ability to accurately fetch user data.
+                A GET request with a valid user ID successfully returned the user’s details with a 200 status code, ensuring proper functionality. There is also the output that an output invalid or non-existent user ID correctly returned a 404 status code with the message "User not found," demonstrating reliable error handling for invalid inputs.
+                The white box testing cases that we have created deeply test what we have implemented in the backend, ensuring that the internal logic and pathways are functioning as intended.
+                By combining AI-generated test scripts with manual refinements, the testing process ensured a thorough and reliable evaluation of all core functionalities, highlighting the robustness and reliability of the system's internal structure.
+            </p>
+            <h1>Comparative Analysis: AI vs Human Test Generation</h1>
+
+            <h2>Performance Metrics</h2>
+            <p>
+                By using AI-assisted test generation we significantly reduced the time required to create test cases compared to human manual efforts.
+                For instance, by our generation of a test case for "Register User (Valid Input)" took only 0.25 minutes with AI, while it took 12 minutes manually.
+                Similar reductions were observed across all test scenarios, with AI-generated times consistently under 1 minute while human-generated times ranged from 8 to 15 minutes.
+                This drastic reduction in time allowed for more iterations and faster development cycles.
+            </p>
+
+            <h2>Usability</h2>
+            <p>
+                When we were using AI tools like GPT-4o and GitHub Copilot provided structured and efficient templates for test cases. These tools streamlined the process,
+                especially for repetitive or straightforward scenarios such as validating user input or error handling.
+                However, when we needed to address nuanced edge cases and ensure comprehensive test coverage, particularly for scenarios involving complex business logic,
+                we needed to jump in and manually refine the test cases. This manual refinement was essential to ensure the accuracy and reliability of the tests.
+            </p>
+
+
+            <h2>Impact on Quality</h2>
+            <p>
+                While AI-generated test cases were consistent and well-structured, they occasionally missed complex edge cases or required additional refinement to ensure correctness.
+                Human-generated tests, specifically depending on whether the developer could address all aspects of the test that they were intending to address, provided more comprehensive coverage and addressed nuanced scenarios effectively. By combining AI-generated test cases with manual refinement, the team achieved a balance of speed and quality.
+            </p>
+
+            <h2>Metrics and Statistical Evidence</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Test Case</th>
+                    <th>AI-Generated Time (minutes)</th>
+                    <th>Human-Generated Time (minutes)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Register User (Valid Input)</td>
+                    <td>0.25</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>Register User (Duplicate Username)</td>
+                    <td>0.4</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>Register User (Missing Username)</td>
+                    <td>0.35</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Register User (Missing Password)</td>
+                    <td>0.3</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>Login (Valid Credentials)</td>
+                    <td>0.25</td>
+                    <td>14</td>
+                </tr>
+                <tr>
+                    <td>Login (Missing Username)</td>
+                    <td>0.3</td>
+                    <td>13</td>
+                </tr>
+                <tr>
+                    <td>Login (Missing Password)</td>
+                    <td>0.4</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>Login (Invalid Password)</td>
+                    <td>0.35</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>Login (Non-Existent User)</td>
+                    <td>0.5</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Search Users (Valid Query)</td>
+                    <td>0.45</td>
+                </tr>
+                <tr>
+                    <td>Search Users (Missing Query Parameter)</td>
+                    <td>0.35</td>
+                </tr>
+                <tr>
+                    <td>Retrieve User by ID (Valid ID)</td>
+                    <td>0.3</td>
+                </tr>
+                <tr>
+                    <td>Retrieve User by ID (Non-Existent ID)</td>
+                    <td>0.4</td>
+                    <td>15</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2>Conclusion</h2>
+            <p>
+                Our comparative analysis demonstrates that AI tools significantly enhance productivity because they significantly reduce generation time.
+                However, the quality of AI-generated tests depends on human refinement to address complex scenarios and ensure comprehensive coverage, this also
+                causes AI to miss a lot of the deeper test cases but humans to also miss test cases that AI may produce.
+                By taking a look at all of the strengths of AI and manual testing provides the optimal balance of speed,
+                usability, and quality for software testing.
+            </p>
+
+
+
+
+        </div>
+
+
+        <div class="contentTitle">
+            <h1>Challenges and Innovations</h1>
+        </div>
+        <div class="contentText">
+          <p>One of the significant challenges faced during the development of GameBoxd was the integration of the IGDB API.
+              Managing rate limits and ensuring the accurate retrieval of game metadata required careful planning. The team
+              implemented caching mechanisms and optimized the frequency of API calls to overcome this hurdle. Scalability
+              concerns also posed a challenge, as designing the platform to accommodate a growing user base and expanding
+              data volumes demanded a robust technology stack. The adoption of MongoDB for flexible data handling and
+              React.js for a scalable frontend architecture effectively addressed these concerns. Implementing AI-generated
+              descriptions using the ChatGPT API added another layer of complexity. Ensuring that the generated content was
+              meaningful, unbiased, and relevant required iterative testing and fine-tuning of prompts to achieve high-quality outputs.</p>
+
+            <p>Balancing speed and quality in the testing process was another notable challenge. While AI tools like GPT-4 and
+              GitHub Copilot significantly accelerated test generation, manual refinement was essential to address edge cases
+              and ensure comprehensive test coverage. Designing a user-friendly interface that worked seamlessly across desktop
+              and mobile devices also required multiple iterations based on user feedback to optimize the user experience.
+              Despite these challenges, the project introduced several innovations. The integration of AI-generated game
+              descriptions provided users with unique, marketing-free insights into games, enhancing discovery and engagement.
+              The use of design patterns such as Singleton, Factory, and Decorator streamlined backend development, improved code
+              maintainability, and facilitated efficient database interactions. Additionally, leveraging AI-assisted tools for
+              test generation reduced development time and allowed the team to focus on enhancing test coverage. Features like
+              real-time search with auto-suggestions and curated game carousels contributed to a dynamic and engaging browsing
+              experience, setting the platform apart from existing solutions.</p>
+        </div>
+
+        <div class="contentTitle">
+            <h1>Project Outcomes and Evaluation</h1>
+        </div>
+        <div class="contentText">
+          <p>You may use this template on any site, anywhere, for free just<strong> please leave the link back to me in the footer</strong>. This template validates XHTML 1.1, CSS Validates as well; enjoy :) </p>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer mi. Vivamus sit amet neque vitae sapien bibendum sodales. Curabitur elementum. Duis imperdiet. Donec eleifend porttitor sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis. Sed vehicula pellentesque quam.</p>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer mi. Vivamus sit amet neque vitae sapien bibendum sodales. Curabitur elementum. Duis imperdiet. Donec eleifend porttitor sapien. Praesent leo. Quisque auctor velit sed tellus. Suspendisse potenti. Aenean laoreet imperdiet nunc. Donec commodo suscipit dolor. Aenean nibh. Sed id odio. Aliquam lobortis risus ut felis. Sed vehicula pellentesque quam.</p>
+        </div>
+
+        <div class="contentTitle">
+            <h1>Future Directions</h1>
+        </div>
+        <div class="contentText">
+          <p>Looking ahead, there are several enhancements and expansions planned for GameBoxd. One key direction is the
+              development of enhanced social features, including direct messaging, collaborative list creation, and discussion
+              forums. These additions aim to foster a more interactive community and encourage greater user engagement. Another
+              priority is the creation of dedicated iOS and Android applications to improve accessibility and enhance the user
+              experience on mobile devices. The integration of advanced AI capabilities is also planned, such as personalized
+              game recommendations based on user preferences, playing history, and community trends. This feature would add
+              significant value by tailoring content to individual users.</p>
+
+            <p>To enrich the platform further, additional APIs or data sources could be integrated to provide more comprehensive
+                game metadata, including developer interviews, behind-the-scenes content, and historical insights. Monetization
+                opportunities could also be explored, such as offering premium subscriptions for ad-free experiences, exclusive
+                content, or partnerships with game publishers for sponsored recommendations. Gamification elements like badges,
+                leaderboards, and achievements could be introduced to incentivize user engagement and create a sense of community
+                accomplishment.</p>
+            
+        </div>
+    </div>
+    <div id="footer"><a href="http://www.bryantsmith.com">web page designer </a> <a href="http://www.bryantsmith.com">bryant smith</a></div>
+</body>
+</html>

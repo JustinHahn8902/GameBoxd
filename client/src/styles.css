@@ -1,6 +1,7 @@
 html, body {
     margin: 0;
-    height: 100%
+    height: 100%;
+    overflow-x: hidden;
 }
 
 #root {
@@ -20,7 +21,7 @@ html, body {
 .profile {
     height: inherit;
     width: inherit;
-    background-color: #C56970;
+    background-color: #f30ca62f;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -628,6 +629,11 @@ body {
     font-size: 2.5rem;
     margin-bottom: 20px;
     text-align: center;
+    color: black;
+}
+
+.my-lists-checkbox-label {
+    color: black;
 }
 
 .create-list-form {
@@ -680,6 +686,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
 }
 
 .list-item h2 {
